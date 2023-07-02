@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
   width: 50%;
   height: 100%;
-  background-color: red;
+  /* background-color: red; */
 `
 
 const ControlPanel = () => {
