@@ -1,0 +1,40 @@
+/* Most rule resets borrowed from https://www.joshwcomeau.com/css/custom-css-reset/ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Customizing links */
+a {
+  transition: 0.15s;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #fff;
+}
+a:hover {
+  color: #35dbc0;
+}
+a:active {
+  color: #20b89e;
+}
+
+/* Defaulting fonts to plex */ 
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
