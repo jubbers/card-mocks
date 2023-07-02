@@ -1,18 +1,26 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+interface ControlPanelProps {
+  controls: React.ReactNode[];
+}
+
+const ControlPanelContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 32px;
+
   width: 50%;
   height: 100%;
-  /* background-color: red; */
+  padding: 64px;
+  background-color: red;
 `
 
-const ControlPanel = () => {
+const ControlPanel = ({controls}: ControlPanelProps) => {
   return (
-    <Container>
-
-    </Container>
+    <ControlPanelContainer>
+      {controls}
+    </ControlPanelContainer>
   )
 }
 

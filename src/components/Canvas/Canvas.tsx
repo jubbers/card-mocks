@@ -8,7 +8,7 @@ interface CanvasProps {
   width: number;
 }
 
-const Container = styled.div`
+const CanvasContainer = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
@@ -30,9 +30,15 @@ const Canvas = ({draw, height, width}: CanvasProps): JSX.Element => {
   })
 
   return(
-    <Container>
-      <canvas ref={canvas} height={height} width={width} />
-    </Container>
+    <CanvasContainer>
+      <canvas 
+        ref={canvas} 
+        height={height} 
+        width={width}
+        style={{
+          borderRadius: '8px 8px 8px 8px' ,
+        }} />
+    </CanvasContainer>
   )
 }
 

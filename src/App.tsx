@@ -23,24 +23,19 @@ const Body = styled.body`
 `;
 
 const draw = (ctx: CanvasRenderingContext2D) => {
-  console.log(ctx.canvas.clientHeight);
-  console.log(ctx.canvas.clientWidth);
-
-  const quarterHeight = ctx.canvas.clientHeight / 4;
-  const quarterWidth = ctx.canvas.clientWidth / 4;
-  ctx.fillStyle = '#000';
-  ctx.fillRect(
-    quarterWidth, 
-    quarterHeight, 
-    ctx.canvas.clientWidth - quarterWidth, 
-    ctx.canvas.clientHeight - quarterHeight);
+  ctx.fillStyle = '#FFF';
+  ctx.fillRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
 }
 
 export default () => (
   <Root>
     <Header />
     <Body>
-      <ControlPanel />
+      <ControlPanel 
+        controls = {[
+          <ControlSet />
+        ]}
+        />
       <Divider />
       <Canvas 
         draw={draw}
@@ -48,5 +43,4 @@ export default () => (
         width={100} />
     </Body>
   </Root>
-
 );
