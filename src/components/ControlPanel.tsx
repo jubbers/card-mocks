@@ -12,8 +12,7 @@ const ControlPanelContainer = styled.div`
 
   width: 50%;
   height: 100%;
-  padding: 64px;
-  background-color: red;
+  padding: 32px;
 `
 
 const ControlPanel = ({controls}: ControlPanelProps) => {

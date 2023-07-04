@@ -6,19 +6,14 @@ interface ControlLabelProps {
 }
 
 const ControlLabelContainer = styled.div`
-  h3 {
-    font-size: 32pt;
-  }
-
-  hr {
-    background-color: #3E3E42;
-  }
+  h2 { font-weight: 200; }
+  hr { background-color: #3E3E42; }
 `;
 
 const ControlLabel = ({label}: ControlLabelProps) => {
   return (
     <ControlLabelContainer>
-      <h3>{label}</h3>
+      <h2>{label.toLocaleLowerCase()}</h2>
       <hr />
     </ControlLabelContainer>
   );

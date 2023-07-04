@@ -4,6 +4,8 @@ import Header from '~components/Header';
 import Canvas from '~components/Canvas';
 import Divider from '~components/Divider';
 import ControlPanel from "~components/ControlPanel";
+import { CardForm } from '~types';
+import { Setup } from '~components/Controls';
 import 'reset.css'
 
 const Root = styled.div`
@@ -13,7 +15,7 @@ const Root = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #1E1E1E;
-  color: #FFF;
+  color: #FFFFFF;
 `
 
 const Body = styled.body`
@@ -27,15 +29,20 @@ const draw = (ctx: CanvasRenderingContext2D) => {
   ctx.fillRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
 }
 
-export default () => (
+export default () => {
+  const [form, setForm] = React.useState<CardForm>({
+    height: 1125,
+    width: 825,
+    backgroundColor: '#FFFFFF',
+  });
+  
+  return (
   <Root>
     <Header />
     <Body>
-      <ControlPanel 
-        controls = {[
-          <ControlSet />
-        ]}
-        />
+      <ControlPanel controls = {[
+        <Setup form={form} setForm={setForm} /> 
+        ]} />
       <Divider />
       <Canvas 
         draw={draw}
@@ -43,4 +50,4 @@ export default () => (
         width={100} />
     </Body>
   </Root>
-);
+)};
