@@ -7,17 +7,17 @@ interface ControlTextProps {
   id: string;
   label: string;
   placeholder: string;
+  content: string;
+  update: (content: string) => void;
 }
 
-
-const ControlText = ({id, label, placeholder}: ControlTextProps) => {
-  const [content, setContent] = React.useState('')
+const ControlText = ({id, label, placeholder, content, update}: ControlTextProps) => {
   const invalidInputRegex = /[^a-zA-Z0-9_ ]/g;
 
   const uniqueId = `${id}_${uuidv4()}`;
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const validatedString = e.currentTarget.value.replace(invalidInputRegex, '');
-    setContent(validatedString);
+    update(validatedString);
   }
 
   return (

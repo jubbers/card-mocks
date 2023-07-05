@@ -6,7 +6,8 @@ import { ControlInput, ControlPair } from '~components/Controls';
 interface ControlNumberProps {
   id: string;
   label: string;
-  defaultValue: number;
+  value: number;
+  update: (value: number) => void;
 }
 
 const NumberInput = styled(ControlInput)`
@@ -14,16 +15,15 @@ const NumberInput = styled(ControlInput)`
   appearance: textfield;
 `
 
-const ControlNumber = ({id, label, defaultValue}: ControlNumberProps) => {
-  const [value, setValue] = React.useState<number>(defaultValue);
+const ControlNumber = ({id, label, value, update}: ControlNumberProps) => {
   const uniqueId = `${id}_${uuidv4()}`;
-  const invalidInputRegex = /[^0-9]/g;
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const validatedString = e.currentTarget.value.replace(invalidInputRegex, '');
-    const newValue: number = parseInt(validatedString, 10);
-    if (newValue) {
-      setValue(newValue);
+    const newValue: number = parseInt(e.currentTarget.value, 10);
+    console.log(newValue);
+    
+    if (!!newValue) {
+      update(newValue);
     }
   }
 

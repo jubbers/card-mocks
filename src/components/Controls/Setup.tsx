@@ -11,16 +11,16 @@ import {
 interface SetupProps extends FormProps {};
 
 const Setup = ({form, setForm}: SetupProps) => {
-  const updateSetName = () => {
-
+  const updateSetName = (setName: string) => {
+    setForm({ ...form, setName });
   }
 
-  const updateHeight = () => {
-
+  const updateHeight = (height: number) => {
+    setForm({ ...form, height });
   }
 
-  const updateWidth = () => {
-    
+  const updateWidth = (width: number) => {
+    setForm({ ...form, width });
   }
 
   return (
@@ -29,15 +29,19 @@ const Setup = ({form, setForm}: SetupProps) => {
       <ControlText 
         id='setName'
         label='set name'
-        placeholder='fishing game v6.2' />
+        placeholder='fishing game v6.2'
+        content={form.setName}
+        update={updateSetName} />
       <ControlNumber
         id='height'
         label='height (px)'
-        defaultValue={1125} />
+        value={form.height} 
+        update={updateHeight}/>
       <ControlNumber
         id='width'
         label='width (px)'
-        defaultValue={825} />
+        value={form.width}
+        update={updateWidth} />
     </ControlForm>
   )
 }

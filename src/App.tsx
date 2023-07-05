@@ -18,7 +18,7 @@ const Root = styled.div`
   color: #FFFFFF;
 `
 
-const Body = styled.body`
+const Body = styled.main`
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -34,20 +34,20 @@ export default () => {
     height: 1125,
     width: 825,
     backgroundColor: '#FFFFFF',
+    setName: '',
   });
   
   return (
   <Root>
     <Header />
     <Body>
-      <ControlPanel controls = {[
-        <Setup form={form} setForm={setForm} /> 
+      <ControlPanel controls={[
+        <Setup form={form} setForm={setForm} key='setup'/> 
         ]} />
       <Divider />
       <Canvas 
-        draw={draw}
-        height={100}
-        width={100} />
+        form={form}
+        draw={draw} />
     </Body>
   </Root>
 )};
