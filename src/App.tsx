@@ -31,8 +31,8 @@ const draw = (ctx: CanvasRenderingContext2D) => {
 
 export default () => {
   const [form, setForm] = React.useState<CardForm>({
-    height: 1125,
-    width: 825,
+    height: 700,
+    width: 500,
     backgroundColor: '#FFFFFF',
     setName: '',
   });
@@ -47,7 +47,8 @@ export default () => {
       <Divider />
       <Canvas 
         form={form}
-        draw={draw} />
+        draw={draw} 
+        padding={24} />
     </Body>
   </Root>
 )};

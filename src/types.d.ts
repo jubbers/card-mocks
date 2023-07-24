@@ -7,7 +7,12 @@ export interface CardForm {
   setName: string;
 }
 
-interface FormProps {
+export interface FormProps {
   form: CardForm;
   setForm: (form: CardForm) => void;
+}
+
+export type Vector2D = {
+  x: number;
+  y: number;
 }
