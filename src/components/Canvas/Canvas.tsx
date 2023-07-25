@@ -1,46 +1,41 @@
 import * as React from 'react';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CardForm, Vector2D } from '~types';
+import { CalculateCardScalar } from './helpers';
 
 interface CanvasProps {
   form: CardForm;
-  draw: (context: CanvasRenderingContext2D) => void;
+  draw: (form: CardForm, context: CanvasRenderingContext2D) => void;
   padding: number;
 }
 
 const CanvasContainer = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 23px;
+`
+
+const CanvasWidthError = styled.p`
+  color: red;
+  font-size: 10px;
 `
 
 const Canvas = ({form, draw, padding}: CanvasProps): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>(null);
-  const container = useRef<HTMLDivElement>(null);
+  const [ displayWidthError, setDisplayWidthError ] = useState(false);
 
   const render = () => {
+    const parentRect = canvas.current!.parentElement?.getBoundingClientRect() as DOMRect;
+    canvas.current!.height = parentRect.height;
+    canvas.current!.width = parentRect.width;
+    setDisplayWidthError(canvas.current!.width < 400)
+
     if (!canvas.current) throw new Error("Invalid canvas context");
-    if (!container.current) throw new Error("Invalid canvas container context");
-    
-    // TODO: Add support for if card is too wide
-    // If card is too tall, scale to fit
-    const maxCardHeight = container.current!.clientHeight - (padding * 2);
-    console.log(maxCardHeight);
-    if (form.height > maxCardHeight) {
-      console.log(`Height: ${form.height}`);
-      console.log(`Max H:  ${maxCardHeight}`);
-      const aspectRatioShift = maxCardHeight / form.height;
-
-      canvas.current!.height = maxCardHeight;
-      canvas.current!.width = maxCardHeight * aspectRatioShift;
-    }
-
-    // Draw to scaled canvas
-    draw(canvas.current.getContext('2d') as CanvasRenderingContext2D);
+    draw(form, canvas.current.getContext('2d') as CanvasRenderingContext2D);
   }
 
   useEffect(() => {
@@ -50,14 +45,8 @@ const Canvas = ({form, draw, padding}: CanvasProps): JSX.Element => {
   });
 
   return(
-    <CanvasContainer ref={container}>
-      <canvas 
-        ref={canvas} 
-        height={form.height} 
-        width={form.width}
-        style={{
-          borderRadius: '8px 8px 8px 8px' ,
-        }} />
+    <CanvasContainer>
+      <canvas ref={canvas} />
     </CanvasContainer>
   )
 }
