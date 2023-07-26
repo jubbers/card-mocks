@@ -4,7 +4,7 @@ const form: CardForm = {
   height: 700,
   width: 400,
   backgroundColor: '#FFFFFF',
-  padding: 12,
+  padding: 16,
   setName: '',
 
   components: [],

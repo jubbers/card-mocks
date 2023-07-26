@@ -10,7 +10,7 @@ import {
 
 interface SetupProps extends FormProps {};
 
-const Setup = ({form, setForm}: SetupProps) => {
+const Setup = ({cardForm: form, setForm}: SetupProps) => {
   const updateSetName = (setName: string) => {
     setForm({ ...form, setName });
   }

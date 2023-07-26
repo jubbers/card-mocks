@@ -34,13 +34,12 @@ export default () => {
     <Header />
     <Body>
       <ControlPanel controls={[
-        <Setup form={form} setForm={setForm} key='setup'/> 
+        <Setup cardForm={form} setForm={setForm} key='setup'/> 
         ]} />
       <Divider />
       <Canvas 
-        form={form}
-        draw={draw} 
-        padding={24} />
+        cardForm={form}
+        draw={draw} />
     </Body>
   </Root>
 )};

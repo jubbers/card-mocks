@@ -1,25 +1,28 @@
 import { CardForm, Rect, Vector2D } from "~types";
 import { CenterAbout } from "./Helpers";
 
-const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCard: Vector2D) => {
+const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardDimensions: Vector2D) => {
   ctx.save();
   
   const {clientWidth, clientHeight} = ctx.canvas;
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   console.log(`Center: (${center.x}, ${center.y})`)
 
-  const cardRect: Rect = CenterAbout(scaledCard, center);
+  const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
   console.log(cardRect);
 
-  ctx.moveTo(cardRect.x, cardRect.y);
   ctx.fillStyle = `#ffffff`;
+  ctx.moveTo(cardRect.left, cardRect.top);
   ctx.fillRect(
-    cardRect.x,
-    cardRect.y,
-    cardRect.height,
+    cardRect.left,
+    cardRect.top,
     cardRect.width,
-    // 10, // temporary floating number for 
-  )
+    cardRect.height,
+  );
+
+  ctx.fillStyle = `#ff0000`;
+  ctx.arc(center.x, center.y, 10, 0, 2*Math.PI);
+  ctx.fill();
 
   ctx.restore();
 }

@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import { CardForm } from '~types';
 
 interface CanvasProps {
-  form: CardForm;
+  cardForm: CardForm;
   draw: (form: CardForm, context: CanvasRenderingContext2D) => void;
-  padding: number;
 }
 
 const CanvasContainer = styled.div`
@@ -18,7 +17,7 @@ const CanvasContainer = styled.div`
   align-items: center;
 `
 
-const Canvas = ({form, draw, padding}: CanvasProps): JSX.Element => {
+const Canvas = ({cardForm: form, draw}: CanvasProps): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
   const render = () => {
