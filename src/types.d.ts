@@ -1,3 +1,5 @@
+import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS } from "react";
+
 export type HexColor = `#${string}`;
 
 export interface CardForm {
@@ -6,7 +8,9 @@ export interface CardForm {
   backgroundColor: HexColor;
   setName: string;
   padding: IntPercent;
+
   components: CardComponent[];
+  scaledCard: Vector2D;
 }
 
 export interface CardComponent {
@@ -27,16 +31,22 @@ export interface FormProps {
   setForm: (form: CardForm) => void;
 }
 
-export type IntPercent = IntRange<0, 100>;
+export type IntPercent = IntRange<0, 101>; // range 0-100
+
+export type Vector2D = {
+  x: number;
+  y: number;
+}
 
 export type Rect = {
-  height: number;
+  x: number;
+  y: number;
   width: number;
+  height: number;
 }
 
 // Helper types for integer ranges, per https://stackoverflow.com/q/39494689
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
-  ? Acc[number]
-  : Enumerate<N, [...Acc, Acc['length']]>
+  ? Acc[number] : Enumerate<N, [...Acc, Acc['length']]>
 
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>

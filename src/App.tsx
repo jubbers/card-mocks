@@ -6,6 +6,7 @@ import Divider from '~components/Divider';
 import ControlPanel from "~components/ControlPanel";
 import { CardForm } from '~types';
 import { Setup } from '~components/Controls';
+import baseCard from '~CardForms';
 import draw from '~draw';
 import 'reset.css'
 
@@ -26,13 +27,7 @@ const Body = styled.main`
 `;
 
 export default () => {
-  const [form, setForm] = React.useState<CardForm>({
-    height: 700,
-    width: 400,
-    backgroundColor: '#FFFFFF',
-    setName: '',
-    components: [],
-  });
+  const [form, setForm] = React.useState<CardForm>(baseCard);
   
   return (
   <Root>
