@@ -22,7 +22,7 @@ export interface CardComponent {
 
 export type Alignment = {
   type: 'start' | 'center' | 'end';
-  percentage?: IntPercent; // optional override tox  alignment type
+  percentage?: IntPercent; // optional override to alignment type
 };
 
 

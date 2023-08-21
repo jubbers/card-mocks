@@ -9,6 +9,7 @@ import { Setup } from '~components/Controls';
 import baseCard from '~CardForms';
 import draw from '~draw';
 import 'reset.css'
+import AddComponentButton from "~components/AddComponentButton";
 
 const Root = styled.div`
   display: flex;
@@ -28,13 +29,14 @@ const Body = styled.main`
 
 export default () => {
   const [form, setForm] = React.useState<CardForm>(baseCard);
-  
+
   return (
   <Root>
     <Header />
     <Body>
       <ControlPanel controls={[
-        <Setup cardForm={form} setForm={setForm} key='setup'/> 
+        <Setup cardForm={form} setForm={setForm} key='setup'/>,
+        <AddComponentButton cardForm={form} setForm={setForm} key='add-new-component-button'/>
         ]} />
       <Divider />
       <Canvas 

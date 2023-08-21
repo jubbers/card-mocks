@@ -1,8 +1,8 @@
-import { CardForm } from "~types"
+import { CardComponent, CardForm } from "~types"
 
-const form: CardForm = {
+const defaultForm: CardForm = {
   height: 700,
-  width: 400,
+  width: 500,
   backgroundColor: '#FFFFFF',
   padding: 16,
   setName: '',
@@ -14,4 +14,4 @@ const form: CardForm = {
 // TODO: Add default forms for variations of basic form 
 //       (e.g. poker/horizontal/etc)
 
-export default form
+export default defaultForm

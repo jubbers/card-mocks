@@ -8,6 +8,9 @@ const ControlForm = styled.form`
   gap: 16px;
   padding: 16px 32px 24px;
   background-color: #252526;
+
+  border: 2px solid #2D2D30;
+  border-radius: 4px;
 `;
 
 const ControlInput = styled.input`

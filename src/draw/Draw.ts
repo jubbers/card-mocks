@@ -25,7 +25,6 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
 
   // if x clipping exists, try for X
   if (scaledCardDimensions.x > maxCardDimensions.x) {
-    console.log(`Scaled dimensions: ${scaledCardDimensions.x}x${scaledCardDimensions.y}`);
     console.log(`Max dimensions:    ${maxCardDimensions.x}x${maxCardDimensions.y}`)
     console.log('Need to swap to x-clipping');
     scaledCardDimensions = {
