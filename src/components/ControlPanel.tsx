@@ -8,12 +8,14 @@ interface ControlPanelProps {
 const ControlPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 8px;
 
   width: 50%;
   height: 100%;
+  max-height: 100%;
   min-width: 500px;
   padding: 32px;
+  overflow: auto;
 `
 
 const ControlPanel = ({controls}: ControlPanelProps) => {

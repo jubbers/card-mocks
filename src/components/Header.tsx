@@ -6,10 +6,15 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 
   height: 7.5vh;
   padding: 4px 64px 0px 64px;
   border-bottom: 2px solid #3E3E42;
+  background-color: #1E1E1E;
+  z-index: 100;
 `;
 
 const Logo = styled.div`

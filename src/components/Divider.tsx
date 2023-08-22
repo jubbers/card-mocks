@@ -8,7 +8,7 @@ const DividerContainer = styled.div`
 
 const DividerLine = styled.div`
   width: 2px;
-  height: 95%;
+  height: 100%;
   background-color: #3E3E42;
 `
 

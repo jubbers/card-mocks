@@ -19,6 +19,18 @@ const StyledButton = styled.button`
 
   border: 2px solid #2D2D30;
   border-radius: 4px;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #303031;
+    border-color: #37373b;
+  }
+
+  &:active {
+    background-color: #66666b;
+    border-color: #66666b;
+  }
 `
 
 const SizedIcon = styled.img`
@@ -31,7 +43,7 @@ const AddComponentButton = ({cardForm, setForm,}: AddComponentButtonProps) => {
   const createNewTemplateComponent = (_: React.MouseEvent<HTMLButtonElement>) => {
     const formCopy = {...cardForm};
     formCopy.components.push({
-      id: `generated_component_name_${formCopy.components.length}`,
+      id: '',
       content: '',
       horizontal: { type: 'center'},
       vertical: { type: 'center'},

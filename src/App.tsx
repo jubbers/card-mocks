@@ -1,15 +1,16 @@
 import * as React from "react";
 import styled from 'styled-components';
-import Header from '~components/Header';
-import Canvas from '~components/Canvas';
-import Divider from '~components/Divider';
-import ControlPanel from "~components/ControlPanel";
-import { CardForm } from '~types';
-import { Setup } from '~components/Controls';
-import baseCard from '~CardForms';
 import draw from '~draw';
-import 'reset.css'
+import useForm from "~UseForm";
 import AddComponentButton from "~components/AddComponentButton";
+import Canvas from '~components/Canvas';
+import ComponentControl from "~components/Controls/ComponentControl";
+import ControlPanel from "~components/ControlPanel";
+import Divider from '~components/Divider';
+import Header from '~components/Header';
+import { CardComponent, CardForm } from '~types';
+import { Setup } from '~components/Controls';
+import 'reset.css';
 
 const Root = styled.div`
   display: flex;
@@ -17,27 +18,38 @@ const Root = styled.div`
 
   width: 100vw;
   height: 100vh;
-  background-color: #1E1E1E;
-  color: #FFFFFF;
 `
 
 const Body = styled.main`
   display: flex;
   flex-direction: row;
   flex: 1;
+  overflow: hidden; /* stop canvas from expanding */
 `;
 
 export default () => {
-  const [form, setForm] = React.useState<CardForm>(baseCard);
+  const [form, setForm] = useForm();
+
+  const RenderCardComponents = (components: CardComponent[]) => {
+    return components.map((component, index) => (
+      <ComponentControl 
+        key={`component_${index}`}
+        cardForm={form}
+        setForm={setForm}
+        index={index}
+        component={component} />
+    ))
+  }
 
   return (
   <Root>
     <Header />
     <Body>
       <ControlPanel controls={[
-        <Setup cardForm={form} setForm={setForm} key='setup'/>,
-        <AddComponentButton cardForm={form} setForm={setForm} key='add-new-component-button'/>
-        ]} />
+        <Setup cardForm={form} setForm={setForm} key='setup-panel'/>,
+        <div key='form-controls'>{...RenderCardComponents(form.components)}</div>,
+        <AddComponentButton cardForm={form} setForm={setForm} key='new-template-component-button'/>
+      ]} />
       <Divider />
       <Canvas 
         cardForm={form}
