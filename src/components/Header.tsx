@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import cardPath from '~assets/playing-card.png'
+import cardPath from '~assets/icon-cards.png'
 
 const HeaderContainer = styled.header`
   display: flex;

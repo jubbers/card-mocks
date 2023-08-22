@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { CardForm } from '~types';
 import { v4 as uuidv4 } from 'uuid';
-import PlusIcon from '~/assets/plus-icon.png';
+import PlusIcon from '~/assets/icon-plus.png';
 
 interface AddComponentButtonProps {
   cardForm: CardForm;

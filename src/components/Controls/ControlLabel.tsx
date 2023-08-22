@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface ControlLabelProps {
   label: string;
+  removeable?: boolean;
 }
 
 const ControlLabelContainer = styled.div`

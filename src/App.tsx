@@ -25,7 +25,14 @@ const Body = styled.main`
   flex-direction: row;
   flex: 1;
   overflow: hidden; /* stop canvas from expanding */
-`;
+`
+
+const ComponentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 12px;
+`
 
 export default () => {
   const [form, setForm] = useForm();
@@ -37,7 +44,8 @@ export default () => {
         cardForm={form}
         setForm={setForm}
         index={index}
-        component={component} />
+        component={component} 
+        removable />
     ))
   }
 
@@ -47,7 +55,7 @@ export default () => {
     <Body>
       <ControlPanel controls={[
         <Setup cardForm={form} setForm={setForm} key='setup-panel'/>,
-        <div key='form-controls'>{...RenderCardComponents(form.components)}</div>,
+        <ComponentWrapper key='form-controls'>{...RenderCardComponents(form.components)}</ComponentWrapper>,
         <AddComponentButton cardForm={form} setForm={setForm} key='new-template-component-button'/>
       ]} />
       <Divider />

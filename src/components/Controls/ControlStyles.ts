@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const ControlForm = styled.form`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   gap: 16px;
   padding: 16px 32px 24px;

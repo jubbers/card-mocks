@@ -6,6 +6,7 @@ import baseCard from '~CardForms';
 const useForm = (): [CardForm, (setForm: CardForm) => void] => {
   const localStorageKey = 'card-mocks_most-recent-page';
   const savedFormString: string | null = window.localStorage.getItem(localStorageKey); 
+  
   let defaultForm: CardForm;
   if (savedFormString == null) {
     window.localStorage.setItem(localStorageKey, JSON.stringify(baseCard));

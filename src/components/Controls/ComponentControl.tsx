@@ -3,13 +3,15 @@ import { CardComponent, FormProps } from '~types';
 import { ControlForm } from '~components/Controls/ControlStyles';
 import ControlLabel from './ControlLabel';
 import ControlText from './ControlText';
+import ControlRemoveButton from './ControlRemoveButton';
 
 interface ComponentControlProps extends FormProps {
   index: number;
   component: CardComponent;
+  removable?: boolean;
 }
 
-const ComponentControl = ({cardForm, setForm, index, component}: ComponentControlProps) => {
+const ComponentControl = ({cardForm, setForm, index, component, removable: removeable}: ComponentControlProps) => {
   const updateId = (newId: string) => {
     const formCopy = {...cardForm};
     formCopy.components[index] = { ...formCopy.components[index], id: newId }
@@ -24,7 +26,9 @@ const ComponentControl = ({cardForm, setForm, index, component}: ComponentContro
 
   return (
     <ControlForm>
-      <ControlLabel label={component.id || 'id required'} />
+      { removeable && <ControlRemoveButton cardForm={cardForm} setForm={setForm} index={index} /> }
+      
+      <ControlLabel label={component.id || 'id required'}/>
 
       <ControlText 
         id={`component_${index}_id`}

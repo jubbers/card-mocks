@@ -74,3 +74,11 @@ With Parcel's `--public-url` flag, use the following scripts for deployment:
 ```
 
 Then follow the normal procedure in GitHub Pages and select the `gh-pages` branch.
+
+
+## Attributions:
+- Close Icon designed by [Pixel Perfect from Flaticon](https://www.flaticon.com/authors/pixel-perfect).
+
+- Cancel Icon designed by [Fingerprint Designs from Flaticon](https://www.flaticon.com/authors/fingerprint-designs).
+
+- Playing Card Icon designed by [Freepik from Flaticon](https://www.freepik.com/). Updated and remixed for logo design.

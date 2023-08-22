@@ -8,7 +8,8 @@ interface ControlPanelProps {
 const ControlPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-content: space-between;
+  gap: 12px;
 
   width: 50%;
   height: 100%;
