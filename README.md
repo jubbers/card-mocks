@@ -1,6 +1,8 @@
-# Nano React App Default Typescript Template
+![card mocks logo](https://github.com/saint-justin/card-mocks/blob/main/src/assets/logo.png)
 
-The default template project for [nano-react-app](https://github.com/nano-react-app/nano-react-app).
+# Built on the Nano React App Default Typescript Template
+
+The project is build on the [nano-react-app](https://github.com/nano-react-app/nano-react-app) Typescript template.
 
 - `npm start` — This will spawn a development server with a default port of `3000`.
 - `npm run build` — This will output a production build in the `dist` directory.
@@ -28,6 +30,16 @@ vite --port 1234
 
 ## Adding styles
 
+_(Recommended)_
+Use the [styled components](https://github.com/styled-components/styled-components) package to style components in-line for each given component. For example, to style the text color of a button component, you'd use the following:
+```js
+const Button = styled.button`
+  color: grey;
+`;
+```
+For more examples and details, see the [styled components page](https://styled-components.com/) or their extensive [documentation](https://styled-components.com/docs).
+
+_(Only when styled-components doesn't work)_
 You can use CSS files with simple ES2015 `import` statements anywhere in your Javascript:
 
 ```js
