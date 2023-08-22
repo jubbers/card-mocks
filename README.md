@@ -1,6 +1,8 @@
 ![card mocks logo](https://github.com/saint-justin/card-mocks/blob/main/src/assets/logo.png)
 
-# Built on the Nano React App Default Typescript Template
+🃏Card Mocks🃏 is a tool to help card game developers generate large batches of card images according to templates they set up. All they need to do is create a component for each part of the template where they want data displayed (a string of text, a number, an image, etc.), set up IDs correlating spreadsheet columns to those components, and then pass in the spreadsheet to automatically generate all of their cards which follow that template. They'll get a set of cards all generated exactly to the specification that they defined in their template. This expedites the process of beta testing new card games by removing the work of generating cards one step at a time and replacing it with just plopping the entire card data spreadsheet into this tool!
+
+## Built on the Nano React App Default Typescript Template
 
 The project is build on the [nano-react-app](https://github.com/nano-react-app/nano-react-app) Typescript template.
 
