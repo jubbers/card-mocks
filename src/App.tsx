@@ -31,7 +31,7 @@ const ComponentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: space-between;
-  gap: 12px;
+  gap: 12 px;
 `
 
 export default () => {

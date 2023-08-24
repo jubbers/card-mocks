@@ -4,7 +4,6 @@ import { DrawBaseCard } from './Subfunctions';
 const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   const {clientWidth, clientHeight} = ctx.canvas;
 
-  // ctx.fillStyle='#FF0000';
   ctx.fillStyle = '#1E1E1E';
   ctx.fillRect(0, 0, clientWidth, clientHeight);
 
@@ -39,6 +38,8 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
 
   DrawBaseCard(form, ctx, scaledCardDimensions)
   console.log('Base card drawn...');
+
+  
 }
 
 export default draw;

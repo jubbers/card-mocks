@@ -39,8 +39,8 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
 
       <ControlText 
         id={`component_${index}_content`}
-        label='content'
-        placeholder='some text here'
+        label='placeholder content'
+        placeholder='your placeholder info goes here'
         content={component.content}
         update={updateContent} />
 
