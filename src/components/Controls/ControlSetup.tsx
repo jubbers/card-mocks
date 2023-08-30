@@ -5,26 +5,27 @@ import {
   ControlLabel, 
   ControlText, 
   ControlNumber 
-} from '~components/Controls/Subcomponents';
-import ControlColor from '~components/Controls/Subcomponents/ControlColor';
+} from '~components/Controls/Atoms';
+import ControlColor from '~components/Controls/Molecules/ControlColor';
+import ControlDoubleNumber from './Molecules/ControlDoubleNumber';
 
 interface SetupProps extends FormProps {};
 
-const Setup = ({cardForm: form, setForm}: SetupProps) => {
+const Setup = ({cardForm, setForm}: SetupProps) => {
   const updateSetName = (setName: string) => {
-    setForm({ ...form, setName });
+    setForm({ ...cardForm, setName });
   }
 
   const updateHeight = (height: number) => {
-    setForm({ ...form, height });
+    setForm({ ...cardForm, height });
   }
 
   const updateWidth = (width: number) => {
-    setForm({ ...form, width });
+    setForm({ ...cardForm, width });
   }
 
   const updateBgColor = (color: HexColor) => {
-    setForm({ ...form, backgroundColor: color });
+    setForm({ ...cardForm, backgroundColor: color });
   }
 
   return (
@@ -34,22 +35,27 @@ const Setup = ({cardForm: form, setForm}: SetupProps) => {
         id='setName'
         label='set name'
         placeholder='fishing game v6.2'
-        content={form.setName}
+        content={cardForm.setName}
         update={updateSetName} />
-      <ControlNumber
-        id='height'
-        label='height (px)'
-        value={form.height} 
-        update={updateHeight}/>
-      <ControlNumber
-        id='width'
-        label='width (px)'
-        value={form.width}
-        update={updateWidth} />
+      <ControlDoubleNumber 
+        controlOne={({
+          id: 'height', 
+          label: 'height (px)', 
+          value: cardForm.height, 
+          update: updateHeight
+        })}
+        controlTwo={({
+          id: 'width', 
+          label: 'width (px)', 
+          value: cardForm.width, 
+          update: updateWidth
+        })}
+      />
+
       <ControlColor 
         id='bgColor'
         label='background color'
-        defaultColor={form.backgroundColor || '#ffffff'}
+        defaultColor={cardForm.backgroundColor || '#ffffff'}
         update={updateBgColor} />
     </ControlForm>
   )

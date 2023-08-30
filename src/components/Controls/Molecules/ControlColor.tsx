@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { HexColor } from '~types';
 import useColor from '~hooks/UseColor';
-import { ControlInput } from './ControlStyles';
+import { ControlInput } from '../Atoms/ControlStyles';
 import { formatDecimalAsHex, formatHexAsDecimal, formatStringAsHex } from '../helpers';
 
 interface ControlColorProps {

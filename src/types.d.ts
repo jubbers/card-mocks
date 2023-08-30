@@ -18,8 +18,10 @@ export interface CardComponent {
   vertical: Alignment
 }
 
+export type AlignmentType = 'start' | 'center' | 'end';
+
 export type Alignment = {
-  type: 'start' | 'center' | 'end';
+  type: AlignmentType;
   percentage?: IntPercent; // optional override to alignment type
 };
 

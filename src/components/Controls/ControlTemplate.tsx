@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { CardComponent, FormProps } from '~types';
-import { ControlForm } from '~components/Controls/Subcomponents/ControlStyles';
-import ControlLabel from '~components/Controls/Subcomponents/ControlLabel';
-import ControlText from '~components/Controls/Subcomponents/ControlText';
+import { Alignment, CardComponent, FormProps } from '~types';
+import { ControlForm } from '~components/Controls/Atoms/ControlStyles';
+import ControlLabel from '~components/Controls/Atoms/ControlLabel';
+import ControlText from '~components/Controls/Atoms/ControlText';
 import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
+import ControlSelect from './Atoms/ControlSelect';
 
 interface ComponentControlProps extends FormProps {
   index: number;
@@ -21,6 +22,12 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
   const updateContent = (newContent: string) => {
     const formCopy = {...cardForm};
     formCopy.components[index] = { ...formCopy.components[index], content: newContent }
+    setForm(formCopy);
+  }
+
+  const updateHorizontalAlignment = (newAlignment: Alignment) => {
+    const formCopy = {...cardForm};
+    formCopy.components[index] = { ...formCopy.components[index], horizontal: newAlignment }
     setForm(formCopy);
   }
 
@@ -44,13 +51,12 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         content={component.content}
         update={updateContent} />
 
-      {/* horizontal (swap to dropdown) */}
-      <ControlText 
-        id={`component_${index}_horizontal_alignment`}
+      <ControlSelect 
+        id={`component_${index}_horizontal-alignment`}
         label='horizontal alignment'
-        placeholder='centered'
-        content={'centered'}
-        update={()=>{}} />
+        defaultIndex={0}
+        items={['percent from left', 'centered', 'percent from right']} 
+        update={() => {}}/>
 
       {/* vertical (swap to dropdown) */}
       <ControlText 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { ControlInput, ControlPair } from '~components/Controls/Subcomponents';
+import { ControlInput, ControlPair } from '~components/Controls/Atoms';
 
-interface ControlNumberProps {
+export interface ControlNumberProps {
   id: string;
-  label: string;
+  label?: string;
   value: number;
   update: (value: number) => void;
 }
@@ -29,7 +29,7 @@ const ControlNumber = ({id, label, value, update}: ControlNumberProps) => {
 
   return (
     <ControlPair>
-      <label htmlFor={uniqueId}>{label}</label>
+      { label && <label htmlFor={uniqueId}>{label}</label> }
       <NumberInput 
         type='number'
         id={uniqueId}
