@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { ControlInput, ControlPair } from '~components/Controls';
+import { ControlInput, ControlPair } from '~components/Controls/Subcomponents';
 
 interface ControlTextProps {
   id: string;

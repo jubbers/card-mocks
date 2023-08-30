@@ -20,9 +20,9 @@ const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardD
     cardRect.height,
   );
 
-  ctx.fillStyle = `#ff0000`;
-  ctx.arc(center.x, center.y, 10, 0, 2*Math.PI);
-  ctx.fill();
+  // ctx.fillStyle = `#ff0000`;
+  // ctx.arc(center.x, center.y, 10, 0, 2*Math.PI);
+  // ctx.fill();
 
   ctx.restore();
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { CardComponent, FormProps } from '~types';
-import { ControlForm } from '~components/Controls/ControlStyles';
-import ControlLabel from './ControlLabel';
-import ControlText from './ControlText';
-import ControlRemoveButton from './ControlRemoveButton';
+import { ControlForm } from '~components/Controls/Subcomponents/ControlStyles';
+import ControlLabel from '~components/Controls/Subcomponents/ControlLabel';
+import ControlText from '~components/Controls/Subcomponents/ControlText';
+import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
 
 interface ComponentControlProps extends FormProps {
   index: number;

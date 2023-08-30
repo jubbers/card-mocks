@@ -1,13 +1,12 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { FormProps, HexColor } from '~types';
 import { 
   ControlForm, 
   ControlLabel, 
   ControlText, 
   ControlNumber 
-} from '~components/Controls/';
-import ControlColor from './ControlColor';
+} from '~components/Controls/Subcomponents';
+import ControlColor from '~components/Controls/Subcomponents/ControlColor';
 
 interface SetupProps extends FormProps {};
 
@@ -50,7 +49,7 @@ const Setup = ({cardForm: form, setForm}: SetupProps) => {
       <ControlColor 
         id='bgColor'
         label='background color'
-        defaultColor='#ffffff'
+        defaultColor={form.backgroundColor || '#ffffff'}
         update={updateBgColor} />
     </ControlForm>
   )

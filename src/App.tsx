@@ -4,12 +4,12 @@ import draw from '~draw';
 import useForm from "~hooks/UseForm";
 import AddComponentButton from "~components/AddComponentButton";
 import Canvas from '~components/Canvas';
-import ComponentControl from "~components/Controls/ComponentControl";
+import ComponentControl from "~components/Controls/ControlTemplate";
 import ControlPanel from "~components/ControlPanel";
 import Divider from '~components/Divider';
 import Header from '~components/Header';
+import Setup from '~components/Controls/ControlSetup';
 import { CardComponent } from '~types';
-import { Setup } from '~components/Controls';
 import 'reset.css';
 
 const Root = styled.div`
