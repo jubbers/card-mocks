@@ -1,5 +1,5 @@
 import { CardForm, Vector2D } from '~types';
-import { DrawBaseCard } from './Subfunctions';
+import { DrawBaseCard, DrawTemplatePlaceholders } from './Subfunctions';
 
 const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   const {clientWidth, clientHeight} = ctx.canvas;
@@ -33,11 +33,14 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
     }
   }
 
-  console.log(`Canvas Dimensions: ${clientWidth}x${clientHeight}`)
-  console.log(`Scaled Card Dimensions: ${scaledCardDimensions.x}x${scaledCardDimensions.y}`)
+  console.log(`Canvas Dimensions: ${clientWidth}x${clientHeight}`);
+  console.log(`Scaled Card Dimensions: ${scaledCardDimensions.x}x${scaledCardDimensions.y}`);
 
-  DrawBaseCard(form, ctx, scaledCardDimensions)
+  DrawBaseCard(form, ctx, scaledCardDimensions);
   console.log('Base card drawn...');
+
+  DrawTemplatePlaceholders(form, ctx, scaledCardDimensions);
+  console.log('Template placeholders drawn...')
 
   
 }

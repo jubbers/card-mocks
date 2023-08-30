@@ -1,12 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FormProps } from '~types';
+import { FormProps, HexColor } from '~types';
 import { 
   ControlForm, 
   ControlLabel, 
   ControlText, 
   ControlNumber 
 } from '~components/Controls/';
+import ControlColor from './ControlColor';
 
 interface SetupProps extends FormProps {};
 
@@ -21,6 +22,10 @@ const Setup = ({cardForm: form, setForm}: SetupProps) => {
 
   const updateWidth = (width: number) => {
     setForm({ ...form, width });
+  }
+
+  const updateBgColor = (color: HexColor) => {
+    setForm({ ...form, backgroundColor: color });
   }
 
   return (
@@ -42,6 +47,11 @@ const Setup = ({cardForm: form, setForm}: SetupProps) => {
         label='width (px)'
         value={form.width}
         update={updateWidth} />
+      <ControlColor 
+        id='bgColor'
+        label='background color'
+        defaultColor='#ffffff'
+        update={updateBgColor} />
     </ControlForm>
   )
 }

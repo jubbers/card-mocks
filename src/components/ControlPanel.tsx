@@ -14,7 +14,7 @@ const ControlPanelContainer = styled.div`
   width: 50%;
   height: 100%;
   max-height: 100%;
-  min-width: 500px;
+  min-width: 570px;
   padding: 32px;
   overflow: auto;
 `

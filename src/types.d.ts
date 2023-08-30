@@ -3,9 +3,9 @@ export type HexColor = `#${string}`;
 export interface CardForm {
   height: number;
   width: number;
-  backgroundColor: HexColor;
   setName: string;
   padding: IntPercent;
+  backgroundColor: HexColor;
 
   components: CardComponent[];
   scaledCard: Vector2D;

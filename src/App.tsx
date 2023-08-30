@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled from 'styled-components';
 import draw from '~draw';
-import useForm from "~UseForm";
+import useForm from "~hooks/UseForm";
 import AddComponentButton from "~components/AddComponentButton";
 import Canvas from '~components/Canvas';
 import ComponentControl from "~components/Controls/ComponentControl";
 import ControlPanel from "~components/ControlPanel";
 import Divider from '~components/Divider';
 import Header from '~components/Header';
-import { CardComponent, CardForm } from '~types';
+import { CardComponent } from '~types';
 import { Setup } from '~components/Controls';
 import 'reset.css';
 
@@ -31,11 +31,11 @@ const ComponentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: space-between;
-  gap: 12 px;
+  gap: 12px;
 `
 
 export default () => {
-  const [form, setForm] = useForm();
+  const [form, setForm] = useForm('card-mocks_most-recent-page');
 
   const RenderCardComponents = (components: CardComponent[]) => {
     return components.map((component, index) => (

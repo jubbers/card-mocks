@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist",
     "site": "mock-cards",
     "ignore": [
       "firebase.json",

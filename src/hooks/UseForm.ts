@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CardForm } from '~types';
 import baseCard from '~CardForms';
 
 // Modified useState to also update local storage on each update
-const useForm = (): [CardForm, (setForm: CardForm) => void] => {
-  const localStorageKey = 'card-mocks_most-recent-page';
+const useForm = (localStorageKey: string): [CardForm, (setForm: CardForm) => void] => {
   const savedFormString: string | null = window.localStorage.getItem(localStorageKey); 
   
   let defaultForm: CardForm;
