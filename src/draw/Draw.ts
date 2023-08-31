@@ -7,6 +7,7 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   ctx.fillStyle = '#1E1E1E';
   ctx.fillRect(0, 0, clientWidth, clientHeight);
 
+  let cardScalar: number;
   const cardAspectRatio = form.width / form.height;
   console.log(`Calculated aspect ratio: ${form.width}:${form.height} or ${cardAspectRatio}`)
 
