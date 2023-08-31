@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { CardForm } from '~types';
+import { CardForm, HexColor } from '~types';
 import { v4 as uuidv4 } from 'uuid';
 import PlusIcon from '~/assets/icon-plus.png';
 
@@ -45,6 +45,7 @@ const AddComponentButton = ({cardForm, setForm,}: AddComponentButtonProps) => {
     formCopy.components.push({
       id: '',
       content: '',
+      textColor: '#000000' as HexColor,
       horizontal: { type: 'center'},
       vertical: { type: 'center'},
     })

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Alignment, CardComponent, FormProps } from '~types';
+import { Alignment, CardComponent, FormProps, HexColor } from '~types';
 import { ControlForm } from '~components/Controls/Atoms/ControlStyles';
 import ControlLabel from '~components/Controls/Atoms/ControlLabel';
 import ControlText from '~components/Controls/Atoms/ControlText';
 import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
 import ControlSelect from './Atoms/ControlSelect';
 import ControlAlignment from './Molecules/ControlAlignment';
+import { ControlColor } from './Atoms';
 
 interface ComponentControlProps extends FormProps {
   index: number;
@@ -35,6 +36,12 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
   const updateVerticalAlignment = (newAlignment: Alignment) => {
     const formCopy = {...cardForm};
     formCopy.components[index] = { ...formCopy.components[index], vertical: newAlignment }
+    setForm(formCopy);
+  }
+
+  const updateTextColor = (newColor: HexColor) => {
+    const formCopy = {...cardForm};
+    formCopy.components[index] = { ...formCopy.components[index], textColor: newColor }
     setForm(formCopy);
   }
 
@@ -71,6 +78,12 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         isHorizontal={false}
         label={'vertical alignment'}
         update={updateVerticalAlignment} />
+
+      <ControlColor 
+        defaultColor={component.textColor}
+        id={`component_${index}_text-color`}
+        label={'text color'}
+        update={updateTextColor}/>
     </ControlForm>
   )
 }

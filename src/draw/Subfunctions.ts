@@ -45,7 +45,8 @@ const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,
     const { content, horizontal, vertical } = component;
     const xPos = CalculateAbsolutePositionX(horizontal, ctx, cardRect);
     const yPos = CalculateAbsolutePositionY(vertical, ctx, cardRect);
-    SetFontOptions(horizontal, ctx, scalar);
+    
+    SetFontOptions(component, ctx, scalar);
     
     ctx.fillText(content, xPos, yPos);
     ctx.restore();

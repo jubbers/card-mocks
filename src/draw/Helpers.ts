@@ -1,4 +1,4 @@
-import { Alignment, AlignmentType, Rect, Vector2D } from "~types";
+import { Alignment, AlignmentType, CardComponent, Rect, Vector2D } from "~types";
 
 /** X/Y Positioning Helpers */
 const CenterAbout = (dimensions: Vector2D, center: Vector2D): Rect => {
@@ -50,8 +50,9 @@ const CalculateAbsolutePositionY = (alignment: Alignment, ctx: CanvasRenderingCo
 }
 
 /** Text Options Side Effects */
-const SetFontOptions = (alignment: Alignment, ctx: CanvasRenderingContext2D, uniformScalar: number): void => {
-  switch(alignment.type) {
+const SetFontOptions = (component: CardComponent, ctx: CanvasRenderingContext2D, uniformScalar: number): void => {
+  // horizontal alignment
+  switch(component.horizontal.type) {
     case 'start':
       ctx.textAlign = 'left'; 
       break;
@@ -63,9 +64,26 @@ const SetFontOptions = (alignment: Alignment, ctx: CanvasRenderingContext2D, uni
       break;
   }
 
+  // vertical alignment
+  switch(component.vertical.type) {
+    case 'start':
+      ctx.textBaseline = 'top'; 
+      break;
+    case 'center':
+      ctx.textBaseline = 'middle';
+      break;
+    case 'end':
+      ctx.textBaseline = 'bottom';
+      break;
+  }
+
+  // font size
   const font: string[] = ctx.font.split(' ');
   font.shift();
   ctx.font = `${24 * uniformScalar}px ` + font.join(' ');
+
+  // font color
+  ctx.fillStyle = component.textColor;
 }
 
 export {

@@ -14,6 +14,7 @@ export interface CardForm {
 export interface CardComponent {
   id: string;
   content: string;
+  textColor: HexColor;
   horizontal: Alignment;
   vertical: Alignment
 }
