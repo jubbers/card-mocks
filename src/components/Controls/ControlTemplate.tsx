@@ -71,7 +71,7 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
           component={cardForm.components[index]}
           id={`component_${index}_horizontal-alignment`}
           isHorizontal={true}
-          label={'horizizontal alignment'}
+          label={'horizontal alignment'}
           update={updateHorizontalAlignment} />
         <ControlAlignment 
           component={cardForm.components[index]}
