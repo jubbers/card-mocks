@@ -38,8 +38,38 @@ const ControlPair = styled.div`
   }
 `;
 
+const SideBySideNumbers = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+
+  div {
+    display: flex;
+    flex: 1;
+  }
+`
+
+const SideBySideAlignment = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  div div :first-child {
+    display: flex;
+    flex: 1;
+  }
+
+  div div :last-child {
+    display: flex;
+    flex: 2;
+  }
+`
+
 export {
   ControlForm,
   ControlInput,
   ControlPair,
+  SideBySideNumbers,
+  SideBySideAlignment,
 }

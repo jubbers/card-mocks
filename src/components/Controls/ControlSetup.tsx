@@ -8,6 +8,7 @@ import {
 } from '~components/Controls/Atoms';
 import ControlColor from '~components/Controls/Molecules/ControlColor';
 import ControlDoubleNumber from './Molecules/ControlDoubleNumber';
+import { SideBySideNumbers } from './Atoms/ControlStyles';
 
 interface SetupProps extends FormProps {};
 
@@ -39,19 +40,18 @@ const Setup = ({cardForm, setForm}: SetupProps) => {
         content={cardForm.templateName}
         update={updateTemplateName} />
 
-      <ControlDoubleNumber 
-        controlOne={({
-          id: 'height', 
-          label: 'height (px)', 
-          value: cardForm.height, 
-          update: updateHeight
-        })}
-        controlTwo={({
-          id: 'width', 
-          label: 'width (px)', 
-          value: cardForm.width, 
-          update: updateWidth
-        })} />
+      <SideBySideNumbers>
+        <ControlNumber 
+          id={'height'}
+          label={'height (px)'}
+          value={cardForm.height} 
+          update={updateHeight} />
+        <ControlNumber 
+          id={'width'}
+          label={'width (px)'}
+          value={cardForm.width} 
+          update={updateWidth} />
+      </SideBySideNumbers>
 
       <ControlColor 
         id='bgColor'

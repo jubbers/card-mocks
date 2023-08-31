@@ -1,12 +1,12 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Alignment, CardComponent, FormProps, HexColor } from '~types';
-import { ControlForm } from '~components/Controls/Atoms/ControlStyles';
+import { ControlForm, SideBySideAlignment } from '~components/Controls/Atoms/ControlStyles';
 import ControlLabel from '~components/Controls/Atoms/ControlLabel';
 import ControlText from '~components/Controls/Atoms/ControlText';
+import ControlAlignment from '~components/Controls/Molecules/ControlAlignment';
 import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
-import ControlSelect from './Atoms/ControlSelect';
-import ControlAlignment from './Molecules/ControlAlignment';
-import { ControlColor } from './Atoms';
+import { ControlColor } from '~components/Controls/Atoms';
 
 interface ComponentControlProps extends FormProps {
   index: number;
@@ -65,19 +65,22 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         placeholder='your placeholder info goes here'
         update={updateContent} />
 
-      <ControlAlignment 
-        component={cardForm.components[index]}
-        id={`component_${index}_horizontal-alignment`}
-        isHorizontal={true}
-        label={'horizontal alignment'}
-        update={updateHorizontalAlignment} />
 
-      <ControlAlignment 
-        component={cardForm.components[index]}
-        id={`component_${index}_vertical-alignment`}
-        isHorizontal={false}
-        label={'vertical alignment'}
-        update={updateVerticalAlignment} />
+      <SideBySideAlignment>
+        <ControlAlignment 
+          component={cardForm.components[index]}
+          id={`component_${index}_horizontal-alignment`}
+          isHorizontal={true}
+          label={'horizizontal alignment'}
+          update={updateHorizontalAlignment} />
+        <ControlAlignment 
+          component={cardForm.components[index]}
+          id={`component_${index}_vertical-alignment`}
+          isHorizontal={false}
+          label={'vertical alignment'}
+          update={updateVerticalAlignment} />
+      </SideBySideAlignment>
+
 
       <ControlColor 
         defaultColor={component.textColor}

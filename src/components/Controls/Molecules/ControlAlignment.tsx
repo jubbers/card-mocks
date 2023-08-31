@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Alignment, AlignmentType, CardComponent, IntPercent } from '~types';
 import { ControlNumber, ControlSelect } from '../Atoms';
 
-interface ControlAlignmentProps {
+export interface ControlAlignmentProps {
   id: string;
   label: string;
   component: CardComponent;
@@ -47,8 +47,8 @@ const CenteredNumbers = styled(ControlNumber)`
 
 const ControlAlignment = ({ id, isHorizontal, label, component, update }: ControlAlignmentProps) => {
   const options = isHorizontal 
-    ? ['percent from left', 'center', 'percent from right']
-    : ['percent from top', 'center', 'percent from bottom'];
+    ? ['% on left', 'center', '% on right']
+    : ['% on top', 'center', '% on bottom'];
 
   const componentValue = isHorizontal
     ? component.horizontal.percentage

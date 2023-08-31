@@ -33,7 +33,7 @@ const ControlLabelStack = styled.div`
 `
 
 const ColorStack = styled(ControlLabelStack)`
-  flex: 2;
+  flex: 1;
   min-width: 150px;
 
   ::-moz-color-swatch, ::-webkit-color-swatch {
@@ -50,7 +50,7 @@ const ColorStack = styled(ControlLabelStack)`
 const AuxColorControls = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1.5;
+  flex: 1;
 `
 
 const InputRow = styled.div`

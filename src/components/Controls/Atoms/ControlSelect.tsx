@@ -32,7 +32,6 @@ const ControlSelectWrapper = styled.div`
 `
 
 const ControlSelect = ({ id, label, defaultIndex, items, values, update }: ControlSelectProps) => {
-
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     update(e.target.value)
   }
