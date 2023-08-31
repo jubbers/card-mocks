@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { ControlInput, ControlPair } from '~components/Controls/Atoms';
 
 export interface ControlNumberProps {
+  disabled?: boolean;
   id: string;
   label?: string;
-  value: number;
   update: (value: number) => void;
+  value: number;
 }
 
 const NumberInput = styled(ControlInput)`
@@ -15,26 +16,28 @@ const NumberInput = styled(ControlInput)`
   appearance: textfield;
 `
 
-const ControlNumber = ({id, label, value, update}: ControlNumberProps) => {
+const ControlNumber = ({ disabled, id, label, update, value}: ControlNumberProps) => {
   const uniqueId = `${id}_${uuidv4()}`;
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const newValue: number = parseInt(e.currentTarget.value, 10);
-    console.log(newValue);
-    
-    if (!!newValue) {
-      update(newValue);
+    if (e.currentTarget.value === '') {
+      update(0);
+      return;
     }
+    const newValue: number = parseInt(e.currentTarget.value || '0', 10);
+    if (!!newValue) update(newValue);
+  
   }
 
   return (
     <ControlPair>
       { label && <label htmlFor={uniqueId}>{label}</label> }
-      <NumberInput 
-        type='number'
+      <NumberInput
+        type={'number'}
         id={uniqueId}
-        value={value} 
-        onChange={onChange}/>
+        value={disabled ? '' : value}
+        disabled={disabled === undefined ? false : disabled /* weird but allows undefined or T/F 🤷 */}
+        onChange={onChange} />
     </ControlPair>
   )
 }

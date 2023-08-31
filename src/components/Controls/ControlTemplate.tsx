@@ -5,6 +5,7 @@ import ControlLabel from '~components/Controls/Atoms/ControlLabel';
 import ControlText from '~components/Controls/Atoms/ControlText';
 import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
 import ControlSelect from './Atoms/ControlSelect';
+import ControlAlignment from './Molecules/ControlAlignment';
 
 interface ComponentControlProps extends FormProps {
   index: number;
@@ -31,41 +32,45 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
     setForm(formCopy);
   }
 
+  const updateVerticalAlignment = (newAlignment: Alignment) => {
+    const formCopy = {...cardForm};
+    formCopy.components[index] = { ...formCopy.components[index], vertical: newAlignment }
+    setForm(formCopy);
+  }
+
   return (
     <ControlForm>
       { removeable && <ControlRemoveButton cardForm={cardForm} setForm={setForm} index={index} /> }
-      
+
       <ControlLabel label={component.id || 'id required'}/>
 
       <ControlText 
+        content={component.id}
         id={`component_${index}_id`}
         label='id'
         placeholder='column name on your excel doc'
-        content={component.id}
         update={updateId} />
 
       <ControlText 
+        content={component.content}
         id={`component_${index}_content`}
         label='placeholder content'
         placeholder='your placeholder info goes here'
-        content={component.content}
         update={updateContent} />
 
-      <ControlSelect 
+      <ControlAlignment 
+        component={cardForm.components[index]}
         id={`component_${index}_horizontal-alignment`}
-        label='horizontal alignment'
-        defaultIndex={0}
-        items={['percent from left', 'centered', 'percent from right']} 
-        update={() => {}}/>
+        isHorizontal={true}
+        label={'horizontal alignment'}
+        update={updateHorizontalAlignment} />
 
-      {/* vertical (swap to dropdown) */}
-      <ControlText 
-        id={`component_${index}_vertical_alignment`}
-        label='vertical alignment'
-        placeholder='centered'
-        content={'centered'}
-        update={()=>{}}
-      />
+      <ControlAlignment 
+        component={cardForm.components[index]}
+        id={`component_${index}_vertical-alignment`}
+        isHorizontal={false}
+        label={'vertical alignment'}
+        update={updateVerticalAlignment} />
     </ControlForm>
   )
 }

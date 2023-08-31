@@ -5,13 +5,14 @@ import { ControlInput, ControlPair } from '~components/Controls/Atoms';
 
 interface ControlTextProps {
   id: string;
-  label: string;
-  placeholder: string;
   content: string;
+  label?: string;
+  placeholder?: string;
+  disabled?: boolean;
   update: (content: string) => void;
 }
 
-const ControlText = ({id, label, placeholder, content, update}: ControlTextProps) => {
+const ControlText = ({id, label, placeholder, disabled, content, update}: ControlTextProps) => {
   const invalidInputRegex = /[^a-zA-Z0-9_ ]/g;
 
   const uniqueId = `${id}_${uuidv4()}`;
@@ -22,13 +23,14 @@ const ControlText = ({id, label, placeholder, content, update}: ControlTextProps
 
   return (
     <ControlPair>
-      <label htmlFor={uniqueId}>{label}</label>
+      { label && <label htmlFor={uniqueId}>{label}</label> }
       <ControlInput 
         type='text' 
         id={uniqueId}
         value={content} 
         onChange={onChange} 
-        placeholder={placeholder} />
+        disabled={disabled === undefined ? false : disabled /* weird but allows undefined or T/F 🤷 */ }
+        placeholder={placeholder || 'text goes here'} />
     </ControlPair>
   )
 }

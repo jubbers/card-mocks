@@ -5,7 +5,7 @@ const defaultForm: CardForm = {
   width: 500,
   backgroundColor: '#FFFFFF',
   padding: 16,
-  setName: '',
+  templateName: '',
 
   components: [],
   scaledCard: { y: -1, x: -1 },

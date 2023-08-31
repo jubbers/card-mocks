@@ -12,8 +12,8 @@ import ControlDoubleNumber from './Molecules/ControlDoubleNumber';
 interface SetupProps extends FormProps {};
 
 const Setup = ({cardForm, setForm}: SetupProps) => {
-  const updateSetName = (setName: string) => {
-    setForm({ ...cardForm, setName });
+  const updateTemplateName = (setName: string) => {
+    setForm({ ...cardForm, templateName: setName });
   }
 
   const updateHeight = (height: number) => {
@@ -30,13 +30,15 @@ const Setup = ({cardForm, setForm}: SetupProps) => {
 
   return (
     <ControlForm>
-      <ControlLabel label='setup' />
+      <ControlLabel label='template setup' />
+
       <ControlText 
         id='setName'
-        label='set name'
+        label='template name'
         placeholder='fishing game v6.2'
-        content={cardForm.setName}
-        update={updateSetName} />
+        content={cardForm.templateName}
+        update={updateTemplateName} />
+
       <ControlDoubleNumber 
         controlOne={({
           id: 'height', 
@@ -49,8 +51,7 @@ const Setup = ({cardForm, setForm}: SetupProps) => {
           label: 'width (px)', 
           value: cardForm.width, 
           update: updateWidth
-        })}
-      />
+        })} />
 
       <ControlColor 
         id='bgColor'

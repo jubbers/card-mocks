@@ -22,6 +22,11 @@ const ControlInput = styled.input`
   background-color: #1E1E1E;
   border: 2px solid #3E3E42;
   color: #FFF;
+  transition: 0.2s;
+
+  &:disabled {
+    opacity: 50%;
+  }
 `
 
 const ControlPair = styled.div`

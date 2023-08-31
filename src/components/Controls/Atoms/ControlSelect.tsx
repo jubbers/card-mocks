@@ -7,6 +7,7 @@ interface ControlSelectProps {
   label?: string;
   defaultIndex: number;
   items: string[];
+  values?: string[];
   update: (value: string) => void;
 }
 
@@ -30,12 +31,24 @@ const ControlSelectWrapper = styled.div`
   }
 `
 
-const ControlSelect = ({ id, label, defaultIndex, items }: ControlSelectProps) => {
+const ControlSelect = ({ id, label, defaultIndex, items, values, update }: ControlSelectProps) => {
+
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    update(e.target.value)
+  }
+
+  const determineOptionValue = (index: number): string => {
+    if (!values || !values[index]) return items[index];
+    return values[index];
+  }
+
   return (
     <ControlSelectWrapper>
       { label && <label htmlFor={id}>{label}</label> }
-      <select id={id} defaultValue={items[defaultIndex]}>
-        { items.map((item) => <option>{item}</option>) }
+      <select id={id} defaultValue={items[defaultIndex]} onChange={onChange}>
+        { items.map((item, index) => (
+          <option key={`${id}_${index}`} value={determineOptionValue(index)}>{item}</option>
+        ))}
       </select>
     </ControlSelectWrapper>
   )

@@ -3,7 +3,7 @@ export type HexColor = `#${string}`;
 export interface CardForm {
   height: number;
   width: number;
-  setName: string;
+  templateName: string;
   padding: IntPercent;
   backgroundColor: HexColor;
 
