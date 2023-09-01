@@ -1,10 +1,10 @@
 export type HexColor = `#${string}`;
 
 export interface CardForm {
+  templateName: string;
   height: number;
   width: number;
-  templateName: string;
-  padding: IntPercent;
+  padding: number;
   backgroundColor: HexColor;
 
   components: CardComponent[];

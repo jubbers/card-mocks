@@ -7,27 +7,16 @@ import {
   ControlNumber 
 } from '~components/Controls/Atoms';
 import ControlColor from '~components/Controls/Molecules/ControlColor';
-import ControlDoubleNumber from './Molecules/ControlDoubleNumber';
 import { SideBySideNumbers } from './Atoms/ControlStyles';
 
 interface SetupProps extends FormProps {};
 
 const Setup = ({cardForm, setForm}: SetupProps) => {
-  const updateTemplateName = (setName: string) => {
-    setForm({ ...cardForm, templateName: setName });
-  }
-
-  const updateHeight = (height: number) => {
-    setForm({ ...cardForm, height });
-  }
-
-  const updateWidth = (width: number) => {
-    setForm({ ...cardForm, width });
-  }
-
-  const updateBgColor = (color: HexColor) => {
-    setForm({ ...cardForm, backgroundColor: color });
-  }
+  const updateTemplateName = (templateName: string) => setForm({ ...cardForm, templateName });
+  const updateHeight = (height: number) => setForm({ ...cardForm, height });
+  const updateWidth = (width: number) => setForm({ ...cardForm, width });
+  const updatePadding = (padding: number) => setForm({ ...cardForm, padding });
+  const updateBgColor = (backgroundColor: HexColor) => setForm({ ...cardForm, backgroundColor });
 
   return (
     <ControlForm>
@@ -52,6 +41,12 @@ const Setup = ({cardForm, setForm}: SetupProps) => {
           value={cardForm.width} 
           update={updateWidth} />
       </SideBySideNumbers>
+
+      <ControlNumber 
+        id={'padding'}
+        label={'padding (px)'}
+        value={cardForm.padding}
+        update={updatePadding} />
 
       <ControlColor 
         id='bgColor'

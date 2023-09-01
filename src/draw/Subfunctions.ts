@@ -1,6 +1,7 @@
 import { CardComponent, CardForm, Rect, Vector2D } from "~types";
 import { 
   SetFontOptions, 
+  SplitTextToWrap,
   CalculateAbsolutePositionX, 
   CalculateAbsolutePositionY, 
   CenterAbout 
@@ -39,16 +40,25 @@ const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
   const scalar: number = scaledCardDimensions.x / form.width;
+  const paddedCardWidth: number = cardRect.width - (2 * form.padding);
 
   form.components.forEach((component: CardComponent) => {
     ctx.save();
     const { content, horizontal, vertical } = component;
+    SetFontOptions(component, ctx, scalar);
+
     const xPos = CalculateAbsolutePositionX(horizontal, ctx, cardRect);
     const yPos = CalculateAbsolutePositionY(vertical, ctx, cardRect);
+    const fontMetrics = ctx.measureText('Zoo Wee Mama'); // arbitrary text, may as well giggle
+    const lineHeight = fontMetrics.fontBoundingBoxAscent + fontMetrics.fontBoundingBoxDescent
+
+    SplitTextToWrap(content, paddedCardWidth, ctx).forEach((line, i) => {
+      console.log(`Writing line [${line}] at position [${xPos},${yPos + (i * lineHeight)}]`)
+      ctx.fillText(line, xPos, yPos + (i * lineHeight))
+    });
+     
     
-    SetFontOptions(component, ctx, scalar);
-    
-    ctx.fillText(content, xPos, yPos);
+    // ctx.fillText(content, xPos, yPos);
     ctx.restore();
   })
 }

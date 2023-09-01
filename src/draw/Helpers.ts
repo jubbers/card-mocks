@@ -86,9 +86,33 @@ const SetFontOptions = (component: CardComponent, ctx: CanvasRenderingContext2D,
   ctx.fillStyle = component.textColor;
 }
 
+/** Text writing */
+const SplitTextToWrap = (text: string, paddedCardWidth: number, ctx: CanvasRenderingContext2D): string[]=> {
+  const words = text.split(' ');
+  let currentRow: string[] = [];
+  let completedRows: string[] = []
+
+  words.forEach(word => {
+    currentRow.push(word);
+    console.log(`Adding word to current:\n${currentRow}`)
+
+    if (ctx.measureText(currentRow.join(' ')).width > paddedCardWidth) {
+      console.log(`Overflow detected, rolling back and resetting current...`);
+      console.log(currentRow)
+      currentRow.pop();
+      completedRows.push(...currentRow.join(' ').split('\n'));
+      currentRow = [word];
+    }
+  })
+
+  completedRows.push(...currentRow.join(' ').split('\n'))
+  return completedRows;
+}
+
 export {
   CenterAbout,
   CalculateAbsolutePositionX,
   CalculateAbsolutePositionY,
   SetFontOptions,
+  SplitTextToWrap,
 }

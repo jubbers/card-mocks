@@ -63,8 +63,8 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         id={`component_${index}_content`}
         label='placeholder content'
         placeholder='your placeholder info goes here'
+        textArea={true}
         update={updateContent} />
-
 
       <SideBySideAlignment>
         <ControlAlignment 
