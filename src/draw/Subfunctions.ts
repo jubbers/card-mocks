@@ -57,8 +57,6 @@ const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,
       ctx.fillText(line, xPos, yPos + (i * lineHeight))
     });
      
-    
-    // ctx.fillText(content, xPos, yPos);
     ctx.restore();
   })
 }

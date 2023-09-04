@@ -31,7 +31,6 @@ const CalculateAbsolutePosition = (
         break;
 
       case 'end':
-        ctx.textAlign = 'right'; // TODO: find a way to enact this side effect elsewhere
         position = (basePosition + scaledCardDimension) - discreteShift;
         break;
 

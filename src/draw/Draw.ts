@@ -42,8 +42,6 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
 
   DrawTemplatePlaceholders(form, ctx, scaledCardDimensions);
   console.log('Template placeholders drawn...')
-
-  
 }
 
 export default draw;

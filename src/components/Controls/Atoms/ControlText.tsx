@@ -14,7 +14,7 @@ interface ControlTextProps {
 
 const ControlText = ({ content, disabled, id, label, placeholder, textArea, update}: ControlTextProps) => {
   const invalidInputRegex = /[^a-zA-Z0-9_\r\n ]/g;
-  const invalidTextAreaRegex = /[^a-zA-Z0-9_\f ]/g;
+  const invalidTextAreaRegex = /\p{L}/g;
 
   const textInputOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     const validatedString = e.currentTarget.value.replace(invalidInputRegex, '');
@@ -22,7 +22,7 @@ const ControlText = ({ content, disabled, id, label, placeholder, textArea, upda
   }
 
   const textAreaOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const validatedString = e.currentTarget.value.replace(invalidInputRegex, '');
+    const validatedString = e.currentTarget.value.replace(invalidTextAreaRegex, '');
     update(validatedString);
   }
 
