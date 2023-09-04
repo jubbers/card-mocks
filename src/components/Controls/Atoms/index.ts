@@ -1,21 +1,26 @@
 import { 
-  ControlForm, 
-  ControlInput, 
-  ControlPair 
-} from './ControlStyles';
-import ControlColor from '../Molecules/ControlColor';
-import ControlLabel from './ControlLabel';
-import ControlText from './ControlText';
-import ControlNumber from './ControlNumber';
-import ControlSelect from './ControlSelect';
-
-export {
-  ControlColor,
   ControlForm,
   ControlInput,
-  ControlLabel,
-  ControlNumber,
   ControlPair,
-  ControlSelect,
+  ControlTextArea,
+  SideBySideNumbers,
+  SideBySideAlignment,
+} from '~components/controls/atoms/ControlStyles';
+import ControlLabel from '~components/controls/atoms/ControlLabel';
+import ControlText from '~components/controls/atoms/ControlText';
+import ControlNumber from '~components/controls/atoms/ControlNumber';
+import ControlSelect from '~components/controls/atoms/ControlSelect';
+
+export {
+  ControlForm,
+  ControlInput,
+  ControlPair,
+  ControlTextArea,
+  SideBySideNumbers,
+  SideBySideAlignment,
+  
+  ControlLabel,
   ControlText,
+  ControlNumber,
+  ControlSelect,
 }

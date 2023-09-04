@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormProps, HexColor } from '~types';
 import { 
+  SideBySideNumbers,
   ControlForm, 
   ControlLabel, 
   ControlText, 
   ControlNumber 
-} from '~components/Controls/Atoms';
-import ControlColor from '~components/Controls/Molecules/ControlColor';
-import { SideBySideNumbers } from './Atoms/ControlStyles';
+} from '~components/controls/atoms';
+import { ControlColor} from '~components/controls/molecules';
 
 interface SetupProps extends FormProps {};
 

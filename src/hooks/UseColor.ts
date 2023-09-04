@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatStringAsHex } from '~components/Controls/helpers';
+import { formatStringAsHex } from '~components/controls/control-helpers';
 import { HexColor } from '~types';
 
 type SetColor = (color: HexColor) => void;

@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { ControlInput, ControlPair } from '~components/Controls/Atoms';
-import { ControlTextArea } from './ControlStyles';
+import { 
+  ControlTextArea, 
+  ControlInput, 
+  ControlPair 
+} from '~components/controls/atoms';
 
 interface ControlTextProps {
   content: string;

@@ -9,13 +9,9 @@ import {
 
 const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardDimensions: Vector2D) => {
   ctx.save();
-  
-  const {clientWidth, clientHeight} = ctx.canvas;
+  const { clientWidth, clientHeight } = ctx.canvas;
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
-  console.log(`Center: (${center.x}, ${center.y})`)
-
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
-  console.log(cardRect);
 
   ctx.fillStyle = form.backgroundColor;
   ctx.moveTo(cardRect.left, cardRect.top);
@@ -27,11 +23,6 @@ const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardD
     (scaledCardDimensions.x / form.width) * 10
   );
   ctx.fill();
-
-  // ctx.fillStyle = `#ff0000`;
-  // ctx.arc(center.x, center.y, 10, 0, 2*Math.PI);
-  // ctx.fill();
-
   ctx.restore();
 }
 
@@ -53,10 +44,8 @@ const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,
     const lineHeight = fontMetrics.fontBoundingBoxAscent + fontMetrics.fontBoundingBoxDescent
 
     SplitTextToWrap(content, paddedCardWidth, ctx).forEach((line, i) => {
-      console.log(`Writing line [${line}] at position [${xPos},${yPos + (i * lineHeight)}]`)
       ctx.fillText(line, xPos, yPos + (i * lineHeight))
     });
-     
     ctx.restore();
   })
 }

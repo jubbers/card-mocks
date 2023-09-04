@@ -1,12 +1,16 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { Alignment, CardComponent, FormProps, HexColor } from '~types';
-import { ControlForm, SideBySideAlignment } from '~components/Controls/Atoms/ControlStyles';
-import ControlLabel from '~components/Controls/Atoms/ControlLabel';
-import ControlText from '~components/Controls/Atoms/ControlText';
-import ControlAlignment from '~components/Controls/Molecules/ControlAlignment';
-import ControlRemoveButton from '~components/Controls/ControlTemplateRemoveButton.tsx';
-import { ControlColor } from '~components/Controls/Atoms';
+import { 
+  ControlForm, 
+  ControlLabel, 
+  ControlText,  
+  SideBySideAlignment 
+} from '~components/controls/atoms';
+import { 
+  ControlAlignment,
+  ControlRemoveButton,
+  ControlColor 
+} from '~components/controls/molecules';
 
 interface ComponentControlProps extends FormProps {
   index: number;

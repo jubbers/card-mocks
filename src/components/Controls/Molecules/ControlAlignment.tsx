@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Alignment, AlignmentType, CardComponent, IntPercent } from '~types';
-import { ControlNumber, ControlSelect } from '../Atoms';
+import { ControlNumber, ControlSelect } from '~components/controls/atoms';
 
 export interface ControlAlignmentProps {
   id: string;

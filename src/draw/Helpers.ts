@@ -93,11 +93,7 @@ const SplitTextToWrap = (text: string, paddedCardWidth: number, ctx: CanvasRende
 
   words.forEach(word => {
     currentRow.push(word);
-    console.log(`Adding word to current:\n${currentRow}`)
-
     if (ctx.measureText(currentRow.join(' ')).width > paddedCardWidth) {
-      console.log(`Overflow detected, rolling back and resetting current...`);
-      console.log(currentRow)
       currentRow.pop();
       completedRows.push(...currentRow.join(' ').split('\n'));
       currentRow = [word];
