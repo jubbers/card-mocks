@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { generate } from 'random-words';
@@ -46,20 +47,19 @@ const OptionButton = styled(ControlButton)`
 `
 
 const HomePage = ({ cardForm, setForm }: HomePageProps) => {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const newTemplateOnClick = () => {
     console.log('new button click registered');
     setForm({ ...defaultForm, templateName: generate(3).join('-') });
-    setShowModal(true);
+    setShowModal(!showModal);
     console.log('showModal set to true');
   }
 
-  const dialogueContinue = () => navigate('/edit');
   const dialogueClose = () => { 
     localStorage.clear();
-    setShowModal(false);
+    setShowModal(!showModal);
   };
   const dialogueUpdate = (newName: string) => {
     const formCopy = { ...cardForm };
@@ -70,30 +70,29 @@ const HomePage = ({ cardForm, setForm }: HomePageProps) => {
   return (
     <Root>
       <Header />
-      { showModal && 
-        <ControlDialogue 
-          key={'homepage-control-dialogue'}
-          label={'new template name:'}
-          inputContent={cardForm.templateName}
-          buttonContent={'continue'}
-          continueAction={dialogueContinue} 
-          closeAction={dialogueClose} 
-          updateAction={dialogueUpdate} />
-      }
+
       <CenteredBody>
         <OptionButton onClick={newTemplateOnClick}>
           <h3>generate<br/>new template</h3>
           <img src={IconCard} alt='Card Icon with Plus In Center' />
         </OptionButton>
-
-
-        <Link to={'/load'}>
-          <OptionButton>
-            <h3>load existing<br/>template (local)</h3>
-            <img src={IconFolder} alt='Card Icon with Plus In Center' />
-          </OptionButton>  
-        </Link>
+        <OptionButton onClick={() => navigate('/load')}>
+          <h3>load existing<br/>template (local)</h3>
+          <img src={IconFolder} alt='Card Icon with Plus In Center' />
+        </OptionButton>  
       </CenteredBody>
+
+      { 
+        showModal && 
+        <ControlDialogue 
+          key={'homepage-control-dialogue'}
+          label={'new template name:'}
+          inputContent={cardForm.templateName}
+          buttonContent={'continue'}
+          continueAction={() => navigate('/edit')} 
+          closeAction={dialogueClose} 
+          updateAction={dialogueUpdate} />
+      }
     </Root>
   )
 }

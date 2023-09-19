@@ -12,10 +12,11 @@ interface ControlTextProps {
   label?: string;
   placeholder?: string;
   textArea?: boolean;
+  autoFocus?: boolean;
   update: (content: string) => void;
 }
 
-const ControlText = ({ content, disabled, id, label, placeholder, textArea, update}: ControlTextProps) => {
+const ControlText = ({ autoFocus, content, disabled, id, label, placeholder, textArea, update}: ControlTextProps) => {
   const invalidInputRegex = /[^a-zA-Z0-9_\- .()#,&]/g;
   const invalidTextAreaRegex = /\p{L}/g;
 
@@ -39,12 +40,14 @@ const ControlText = ({ content, disabled, id, label, placeholder, textArea, upda
             value={content} 
             onChange={textAreaOnChange} 
             disabled={disabled === undefined ? false : disabled }
+            autoFocus={autoFocus}
             placeholder={placeholder || 'text goes here'} />
         : <ControlInput 
             type='text' 
             id={id}
             value={content} 
             onChange={textInputOnChange} 
+            autoFocus={autoFocus}
             disabled={disabled === undefined ? false : disabled }
             placeholder={placeholder || 'text goes here'} />
       }

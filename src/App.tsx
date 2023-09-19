@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import useForm from "~hooks/UseForm";
 import { FormContext } from "~hooks/FormContext";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
 import { 
   EditPage, 
   ErrorPage,
@@ -12,21 +12,41 @@ import {
 import 'reset.css';
 
 
+
 export default () => {
-  const [form, setForm, updateLocalStorage] = useForm();
+  // State that needs to be hoisted out of page-level components
+  const [form, setForm] = useForm();
+
+  const router = createBrowserRouter([
+    { 
+      path: '/',
+      element: <HomePage cardForm={form} setForm={setForm}  />
+    },
+    {
+      path: '/load',
+      element: <LoadPage cardForm={form} setForm={setForm} />
+    },
+    {
+      path: '/edit',
+      element: <EditPage cardForm={form} setForm={setForm} />
+    },
+    {
+      path: '*',
+      element: <ErrorPage />
+    }
+  ])
 
   return (
     <React.StrictMode>
-      <FormContext.Provider value={form}>
-        <BrowserRouter key='browser-router'>
+      <RouterProvider router={router} />
+        {/* <BrowserRouter key='browser-router'>
           <Routes key='routes'>
-            <Route path='/' key='home' Component={() => <HomePage key={'homepage'} cardForm={form} setForm={setForm} />} />
-            <Route path='/load' Component={() => <LoadPage key={'loadpage'} cardForm={form} setForm={setForm} />} />
-            <Route path='/edit' Component={() => <EditPage key={'editpage'} cardForm={form} setForm={setForm} />} />
+            <Route path='/' key='home' Component={() => } />
+            <Route path='/load' Component={() => <LoadPage cardForm={form} setForm={setForm} showModal={showModal} setShowModal={setShowModal} />} />
+            <Route path='/edit' Component={() => <EditPage cardForm={form} setForm={setForm} />} />
             <Route errorElement path='*' Component={() => <ErrorPage />} />
           </Routes>
-        </BrowserRouter>
-      </FormContext.Provider>
+        </BrowserRouter> */}
     </React.StrictMode>
   )
 };

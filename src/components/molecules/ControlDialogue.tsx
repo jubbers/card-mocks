@@ -7,7 +7,7 @@ interface ControlDialogueProps {
   label: string;
   inputContent: string;
   buttonContent: string;
-  closeAction: () => void;
+  closeAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
   continueAction: () => void;
   updateAction: (s: string) => void;
 }

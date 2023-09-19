@@ -8,6 +8,8 @@ import { Divider, Header } from '~components/organisms';
 import { Body, Root } from '~components/pages';
 import { CardForm, FormProps } from '~types';
 import { generate } from 'random-words';
+import { ControlButton } from '~components/atoms';
+import defaultForm from '~CardForms';
 
 interface LoadPageProps extends FormProps {};
 
@@ -22,9 +24,16 @@ const LoadOptions = styled.ul`
   gap: 4px;
 `
 
+const loadTemplate = (key: string): CardForm => {
+  const formString = localStorage.getItem(key);
+  if (formString === null) throw new Error(`Invalid template key for loadTemplateCopy [${key}]`);
+  return JSON.parse(formString) as CardForm;
+}
+
 const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
+  const [modalText, setModalText] = useState<string>('');
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [keys, setKeys] = useState<string[]>(Object.keys(localStorage));
-  const [displayModal, setDisplayModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const renderFormOptions = (localStorageKeys: string[]) => {
@@ -37,22 +46,14 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
 
     const loadTemplateCopy = (localStorageKey: string) => {
       console.log('Loading template copy action...');
-      const formString = localStorage.getItem(localStorageKey);
-      if (formString === null) throw new Error(`Invalid template key for loadTemplateCopy [${localStorageKey}]`);
-      
-      const formCopy: CardForm = JSON.parse(formString) as CardForm
-      formCopy.templateName = generate(3).join('-');
-      setForm(formCopy as unknown as CardForm);
-      setDisplayModal(true);
+      const formCopy = { ...loadTemplate(localStorageKey), templateName: generate(3).join('-') };
+      setForm(formCopy);
+      setShowModal(true);
+      setModalText('template copy name:');
     }
 
     const loadTemplateForEdit = (localStorageKey: string) => {
-      console.log('Loading template copy action...');
-      const formString = localStorage.getItem(localStorageKey);
-      if (formString === null) throw new Error(`Invalid template key for loadTemplateCopy [${localStorageKey}]`);
-      setForm(JSON.parse(formString) as CardForm);
-      console.log('Setting template to:')
-      console.log(JSON.parse(formString) as CardForm);
+      setForm(loadTemplate(localStorageKey));
       navigate('/edit');
     }
 
@@ -71,10 +72,10 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
   }
 
   const dialogueContinue = () => navigate('/edit');
-  const dialogueClose = (e: React.MouseEvent<HTMLDivElement>) => { 
+  const dialogueClose = (e: React.MouseEvent<HTMLButtonElement>) => { 
     localStorage.clear();
     e.stopPropagation();
-    setDisplayModal(false);
+    setShowModal(false);
   };
   const dialogueUpdate = (newName: string) => {
     const formCopy = { ...cardForm };
@@ -82,25 +83,34 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
     setForm(formCopy);
   };
 
+  const createNewTemplate = () => {
+    setModalText('new template name:');
+    setForm({ ...defaultForm, templateName: generate(3).join('-') });
+    setShowModal(true);
+  }
+
   return (
     <Root>
-      { displayModal && 
+      <Header />
+      <Body>
+        <LoadOptions>
+          { ...renderFormOptions(keys) }
+          <ControlButton onClick={createNewTemplate}>create a new template</ControlButton>
+        </LoadOptions>
+        <Divider />
+        <Canvas cardForm={cardForm} />
+      </Body>
+
+      { 
+        showModal && 
         <ControlDialogue 
-          label={'duplicate template name:'}
+          label={modalText}
           inputContent={cardForm.templateName}
           buttonContent={'continue'}
           continueAction={dialogueContinue} 
           closeAction={dialogueClose} 
           updateAction={dialogueUpdate} /> 
       }
-      <Header />
-      <Body>
-        <LoadOptions>
-          { ...renderFormOptions(keys) }
-        </LoadOptions>
-        <Divider />
-        <Canvas cardForm={cardForm} />
-      </Body>
     </Root>
   )
 }

@@ -4,7 +4,7 @@ import IconClose from '~assets/icon-close.png';
 import { FormProps } from '~types';
 
 interface ControlRemoveButtonProps {
-  removeAction: () => void;
+  removeAction: (() => void) | ((e: React.MouseEvent<HTMLButtonElement>) => void);
 }
 
 const RemoveButton = styled.button`
