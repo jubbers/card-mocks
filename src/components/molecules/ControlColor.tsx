@@ -2,12 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import useColor from '~hooks/UseColor';
 import { HexColor } from '~types';
-import { ControlInput } from '~components/controls/atoms';
+import { ControlInput } from '~components/atoms';
 import { 
   formatDecimalAsHex, 
   formatHexAsDecimal, 
   formatStringAsHex 
-} from '~components/controls/control-helpers';
+} from '~components/formatting-helpers';
 
 interface ControlColorProps {
   id: string;

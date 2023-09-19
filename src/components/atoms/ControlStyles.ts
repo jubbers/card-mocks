@@ -1,7 +1,30 @@
 
 import styled from 'styled-components';
 
-const ControlForm = styled.form`
+export const ControlButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  color: #fff;
+  background-color: #252526;
+  padding: 6px;
+  border: 2px solid #2D2D30;
+  border-radius: 4px;
+  transition: 0.2s;
+  text-align: left;
+
+  &:hover {
+    background-color: #303031;
+    border-color: #37373b;
+  }
+
+  &:active {
+    background-color: #66666b;
+    border-color: #66666b;
+  }
+`
+
+export const ControlForm = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -13,7 +36,7 @@ const ControlForm = styled.form`
   border-radius: 4px;
 `;
 
-const ControlInput = styled.input`
+export const ControlInput = styled.input`
   width: 100%;
   padding: 4px;
   margin-top: 2px;
@@ -29,11 +52,12 @@ const ControlInput = styled.input`
   }
 `
 
-const ControlTextArea = styled.textarea`
+export const ControlTextArea = styled.textarea`
   width: 100%;
   padding: 4px;
   margin-top: 2px;
   border-radius: 2px;
+  font-size: 14px;
 
   background-color: #1E1E1E;
   border: 2px solid #3E3E42;
@@ -45,7 +69,7 @@ const ControlTextArea = styled.textarea`
   }
 `
 
-const ControlPair = styled.div`
+export const ControlPair = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -54,7 +78,7 @@ const ControlPair = styled.div`
   }
 `;
 
-const SideBySideNumbers = styled.div`
+export const SideBySideNumbers = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -66,7 +90,7 @@ const SideBySideNumbers = styled.div`
   }
 `
 
-const SideBySideAlignment = styled.div`
+export const SideBySideAlignment = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -80,13 +104,4 @@ const SideBySideAlignment = styled.div`
     display: flex;
     flex: 2;
   }
-`
-
-export {
-  ControlForm,
-  ControlInput,
-  ControlPair,
-  ControlTextArea,
-  SideBySideNumbers,
-  SideBySideAlignment,
-}
+`;

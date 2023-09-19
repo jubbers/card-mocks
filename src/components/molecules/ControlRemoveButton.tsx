@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import IconClose from '~assets/icon-close.png';
 import { FormProps } from '~types';
 
-interface ControlRemoveButtonProps extends FormProps {
-  index: number;
+interface ControlRemoveButtonProps {
+  removeAction: () => void;
 }
 
 const RemoveButton = styled.button`
@@ -37,15 +37,9 @@ const RemoveIcon = styled.img`
   height: 10px;
 `
 
-const ControlRemoveButton = ({ cardForm, setForm, index }: ControlRemoveButtonProps) => {
-  const removeControlByIndex = () => {
-    const formCopy = { ...cardForm };
-    formCopy.components.splice(index, 1);
-    setForm(formCopy);
-  }
-
+const ControlRemoveButton = ({ removeAction }: ControlRemoveButtonProps) => {
   return (
-    <RemoveButton onClick={removeControlByIndex}>
+    <RemoveButton onClick={removeAction}>
       <RemoveIcon title='remove' alt='remove icon' src={IconClose} />
     </RemoveButton>
   )

@@ -53,9 +53,3 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
   : Enumerate<N, [...Acc, Acc['length']]>
 
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
-
-/* Asset Type Imports */
-declare module '*.jpg';
-declare module '*.jpeg';
-declare module '*.png';
-declare module '*.svg';

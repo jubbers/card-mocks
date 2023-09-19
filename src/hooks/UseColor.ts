@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatStringAsHex } from '~components/controls/control-helpers';
+import { formatStringAsHex } from '~components/formatting-helpers';
 import { HexColor } from '~types';
 
 type SetColor = (color: HexColor) => void;
@@ -14,9 +14,6 @@ const useColor = (defaultColor: HexColor, updateColor: (color: HexColor) => void
   const getBlue = () => color.slice(5, 7);
 
   const setFullColor = (newColor: HexColor): void => {
-    console.log(`Prev hex color: ${color}`)
-    console.log(`Prev color ind: ${getRed()} ${getGreen()} ${getBlue()}`)
-    console.log(`New hex color:  ${newColor}`);
     updateColor(newColor);
     setColor(newColor);
   }

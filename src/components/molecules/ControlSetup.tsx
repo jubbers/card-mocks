@@ -6,8 +6,8 @@ import {
   ControlLabel, 
   ControlText, 
   ControlNumber 
-} from '~components/controls/atoms';
-import { ControlColor} from '~components/controls/molecules';
+} from '~components/atoms';
+import { ControlColor} from '~components/molecules';
 
 interface SetupProps extends FormProps {};
 

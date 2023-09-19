@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import cardPath from '~assets/icon-cards.png'
+import cardPath from '~assets/icon-cards.png';
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -14,7 +15,7 @@ const HeaderContainer = styled.header`
   padding: 4px 64px 0px 64px;
   border-bottom: 2px solid #3E3E42;
   background-color: #1E1E1E;
-  z-index: 100;
+  z-index: 99; //100+ reserved for modal style overlays
 `;
 
 const Logo = styled.div`
@@ -35,10 +36,12 @@ const Logo = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Logo>
-        <img src={cardPath} />
-        <h1>Mock Cards</h1>
-      </Logo>
+      <Link to={'/'}>
+        <Logo>
+            <img src={cardPath} />
+            <h1>Mock Cards</h1>
+        </Logo>
+      </Link>
     </HeaderContainer>
   )
 }

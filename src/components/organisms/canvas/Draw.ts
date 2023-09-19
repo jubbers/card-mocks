@@ -1,5 +1,5 @@
 import { CardForm, Vector2D } from '~types';
-import { DrawBaseCard, DrawTemplatePlaceholders } from './Subfunctions';
+import { DrawBaseCard, DrawTemplatePlaceholders } from './draw-subfunctions';
 
 const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   const {clientWidth, clientHeight} = ctx.canvas;

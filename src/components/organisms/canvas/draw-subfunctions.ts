@@ -5,9 +5,9 @@ import {
   CalculateAbsolutePositionX, 
   CalculateAbsolutePositionY, 
   CenterAbout 
-} from "./Helpers";
+} from "./draw-helpers";
 
-const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardDimensions: Vector2D) => {
+export const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardDimensions: Vector2D) => {
   ctx.save();
   const { clientWidth, clientHeight } = ctx.canvas;
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
@@ -20,13 +20,13 @@ const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardD
     cardRect.top,
     cardRect.width,
     cardRect.height,
-    (scaledCardDimensions.x / form.width) * 10
+    Math.abs((scaledCardDimensions.x / form.width) * 10)
   );
   ctx.fill();
   ctx.restore();
 }
 
-const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,  scaledCardDimensions: Vector2D, ) => {
+export const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,  scaledCardDimensions: Vector2D, ) => {
   const { clientWidth, clientHeight } = ctx.canvas;
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
@@ -48,9 +48,4 @@ const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,
     });
     ctx.restore();
   })
-}
-
-export {
-  DrawBaseCard,
-  DrawTemplatePlaceholders
 }

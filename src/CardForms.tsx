@@ -1,4 +1,4 @@
-import { CardComponent, CardForm } from "~types"
+import { CardForm } from "~types"
 
 const defaultForm: CardForm = {
   height: 700,

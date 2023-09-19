@@ -16,10 +16,8 @@ const StyledButton = styled.button`
   color: #fff;
   background-color: #252526;
   padding: 6px;
-
   border: 2px solid #2D2D30;
   border-radius: 4px;
-
   transition: 0.2s;
 
   &:hover {

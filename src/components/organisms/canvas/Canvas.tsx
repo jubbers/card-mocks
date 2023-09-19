@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Draw from '~draw';
 import { CardForm } from '~types';
 
 interface CanvasProps {
   cardForm: CardForm;
-  draw: (form: CardForm, context: CanvasRenderingContext2D) => void;
 }
 
 const CanvasContainer = styled.div`
@@ -17,7 +17,7 @@ const CanvasContainer = styled.div`
   align-items: center;
 `
 
-const Canvas = ({cardForm: form, draw}: CanvasProps): JSX.Element => {
+const Canvas = ({cardForm: form}: CanvasProps): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
   const render = () => {
@@ -26,7 +26,7 @@ const Canvas = ({cardForm: form, draw}: CanvasProps): JSX.Element => {
     canvas.current!.width = parentRect.width;
 
     if (!canvas.current) throw new Error("Invalid canvas context");
-    draw(form, canvas.current.getContext('2d') as CanvasRenderingContext2D);
+    Draw(form, canvas.current.getContext('2d') as CanvasRenderingContext2D);
   }
 
   useEffect(() => {

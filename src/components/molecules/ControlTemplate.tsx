@@ -5,12 +5,12 @@ import {
   ControlLabel, 
   ControlText,  
   SideBySideAlignment 
-} from '~components/controls/atoms';
+} from '~components/atoms';
 import { 
   ControlAlignment,
   ControlRemoveButton,
   ControlColor 
-} from '~components/controls/molecules';
+} from '~components/molecules';
 
 interface ComponentControlProps extends FormProps {
   index: number;
@@ -49,9 +49,15 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
     setForm(formCopy);
   }
 
+  const removeControl = () => {
+    const formCopy = { ...cardForm };
+    formCopy.components.splice(index, 1);
+    setForm(formCopy);
+  }
+
   return (
     <ControlForm>
-      { removeable && <ControlRemoveButton cardForm={cardForm} setForm={setForm} index={index} /> }
+      { removeable && <ControlRemoveButton removeAction={removeControl} /> }
 
       <ControlLabel label={component.id || 'id required'}/>
 

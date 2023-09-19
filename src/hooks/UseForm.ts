@@ -1,26 +1,24 @@
 import { useState } from 'react'
+import { generate } from 'random-words';
 import { CardForm } from '~types';
 import baseCard from '~CardForms';
 
-// Modified useState to also update local storage on each update
-const useForm = (localStorageKey: string): [CardForm, (setForm: CardForm) => void] => {
-  const savedFormString: string | null = window.localStorage.getItem(localStorageKey); 
-  
-  let defaultForm: CardForm;
-  if (savedFormString == null) {
-    window.localStorage.setItem(localStorageKey, JSON.stringify(baseCard));
-    defaultForm = baseCard;
-  } else {
-    defaultForm = JSON.parse(savedFormString) as CardForm;
-  }
-
-  const [form, setForm] = useState<CardForm>(defaultForm);
+// Custom hook for helping with localstorage management
+const useForm = (): [CardForm, (setForm: CardForm) => void, () => void] => {
+  const [form, setForm] = useState<CardForm>({ ...baseCard});
   const updateForm = (newForm: CardForm) => {
-    window.localStorage.setItem(localStorageKey, JSON.stringify(newForm));
+    if (newForm.templateName !== form.templateName) {
+      window.localStorage.removeItem(form.templateName);
+      updateLocalStorage();
+    }
     setForm(newForm);
   }
 
-  return [form, updateForm];
+  const updateLocalStorage = () => {
+    window.localStorage.setItem(form.templateName, JSON.stringify(form));
+  }
+
+  return [form, updateForm, updateLocalStorage];
 }
 
 export default useForm;

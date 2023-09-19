@@ -3,7 +3,7 @@ import {
   ControlTextArea, 
   ControlInput, 
   ControlPair 
-} from '~components/controls/atoms';
+} from '~components/atoms';
 
 interface ControlTextProps {
   content: string;
@@ -16,7 +16,7 @@ interface ControlTextProps {
 }
 
 const ControlText = ({ content, disabled, id, label, placeholder, textArea, update}: ControlTextProps) => {
-  const invalidInputRegex = /[^a-zA-Z0-9_\r\n ]/g;
+  const invalidInputRegex = /[^a-zA-Z0-9_\- .()#,&]/g;
   const invalidTextAreaRegex = /\p{L}/g;
 
   const textInputOnChange = (e: React.FormEvent<HTMLInputElement>) => {
