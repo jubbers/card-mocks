@@ -12,6 +12,8 @@ const CanvasContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-width: 100px;
+  min-height: 300px;
   width: 100%;
   justify-content: center;
   align-items: center;
