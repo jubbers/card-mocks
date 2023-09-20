@@ -60,6 +60,7 @@ const ControlDialogue = ({label, inputContent, buttonContent, continueAction, cl
         <ControlPair>
           <DialogueLabel htmlFor={'control_dialogue_box'}>{label}</DialogueLabel>
           <ControlText 
+            autoFocus={true}
             id={'control_dialogue_box'}
             content={inputContent}  
             update={updateAction} />

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ControlButton } from '~components/atoms';
-import { ControlRemoveButton } from '~components/molecules';
 import IconEdit from '~assets/icon-edit.png';
 import IconCopy from '~assets/icon-copy.png';
 import IconTrash from '~assets/icon-trash-bin.png';
@@ -10,7 +9,6 @@ interface ControlTemplateLoaderProps {
   templateKey: string;
   modified: string;
 
-  actionCloseDialogue: (key: string) => void;
   actionEdit: (key: string) => void;
   actionCopy: (key: string) => void;
   actionDelete: (key: string) => void;
@@ -22,38 +20,39 @@ const TemplateLoaderWrapper = styled.li`
   gap: 4px;
   min-height: 32px;
 
-  :first-child {
-    flex: 1;
+  * {
+    cursor: pointer;
   }
 `
 
 const LoaderButton = styled(ControlButton)`
   width: 32px;
   height: 32px;
+  justify-content: space-between;
+`
 
-  :last-child {
-    text-align: right;
-  }
+const FlexButton = styled(LoaderButton)`
+  flex: 1;
 `
 
 // TODO: Fix length of this somehow
 const ControlTemplateLoader = ({
-  templateKey, modified, actionCloseDialogue, actionEdit, actionCopy, actionDelete
+  templateKey, modified, actionEdit, actionCopy, actionDelete
 }: ControlTemplateLoaderProps) => {
 
   return (
     <TemplateLoaderWrapper>
-      <LoaderButton onClick={() => actionEdit(templateKey)}>
+      <FlexButton onClick={() => actionEdit(templateKey)}>
         <p>{templateKey}</p>
         <p>{modified}</p>
-      </LoaderButton>
-      <LoaderButton onClick={() => actionEdit(templateKey)}>
+      </FlexButton>
+      <LoaderButton onClick={() => actionEdit(templateKey)} title={'edit'}>
         <img src={IconEdit} alt={'edit icon'} />
       </LoaderButton>
-      <LoaderButton onClick={() => actionCopy(templateKey)}>
+      <LoaderButton onClick={() => actionCopy(templateKey)} title={'copy'}>
         <img src={IconCopy} alt={'copy icon'} />
       </LoaderButton>
-      <LoaderButton onClick={() => actionDelete(templateKey)}>
+      <LoaderButton onClick={() => actionDelete(templateKey)} title={'delete'}>
         <img src={IconTrash} alt={'delete icon'} />
       </LoaderButton>
     </TemplateLoaderWrapper>

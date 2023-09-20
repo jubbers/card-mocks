@@ -84,3 +84,5 @@ Then follow the normal procedure in GitHub Pages and select the `gh-pages` branc
 - Cancel Icon designed by [Fingerprint Designs from Flaticon](https://www.flaticon.com/authors/fingerprint-designs).
 
 - Playing Card Icon designed by [Freepik from Flaticon](https://www.freepik.com/). Updated and remixed for logo design.
+
+- Save Diskette Icon designed by [Yogi Aprelliyanto from Flaticon](https://www.flaticon.com/authors/yogi-aprelliyanto)

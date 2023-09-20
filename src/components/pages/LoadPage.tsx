@@ -63,7 +63,6 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
           key={`load_template_button_${index}`}
           templateKey={localStorageKey}
           modified={'HH:MMxx'}
-          actionCloseDialogue={loadTemplateForEdit} 
           actionEdit={loadTemplateForEdit} 
           actionCopy={loadTemplateCopy} 
           actionDelete={removeFromLocalStorage} /> 

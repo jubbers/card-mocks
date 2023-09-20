@@ -22,7 +22,6 @@ const ControlColorWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-
 `
 
 const ControlLabelStack = styled.div`
@@ -39,6 +38,7 @@ const ControlLabelStack = styled.div`
 const ColorStack = styled(ControlLabelStack)`
   flex: 1;
   min-width: 150px;
+  color: #A8A8A8;
 
   ::-moz-color-swatch, ::-webkit-color-swatch {
     border: none;
