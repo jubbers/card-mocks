@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import cardPath from '~assets/icon-cards.png';
 import { Link } from 'react-router-dom';
@@ -50,10 +51,11 @@ const Buttons = styled.div`
 
 const HeaderButton = styled(ControlButton)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 6px;
+  gap: 6px;
   cursor: pointer;  
 
   img {
@@ -62,31 +64,54 @@ const HeaderButton = styled(ControlButton)`
 `;
 
 
-const Header = ({saveAction, loadAction}: HeaderProps) => (
-  <HeaderContainer>
-    <Link to={'/'}>
-      <Logo>
-        <img src={cardPath} />
-        <h1>Mock Cards</h1>
-      </Logo>
-    </Link>
+const Header = ({ saveAction, loadAction }: HeaderProps) => {
+  let allowSave: boolean = true;
 
-    <Buttons>
-      {
-        loadAction && 
-        <HeaderButton onClick={loadAction} title='load'>
-          <img src={IconLoad} alt={'Load Icon'} />
-        </HeaderButton>
+  useEffect(() => {
+    /* Currently bugged, fix before release
+    if (saveAction === undefined) return;
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 's' && !e.repeat) {
+        e.preventDefault();
+        if (!allowSave) return;
+        allowSave = false;
+        saveAction();
       }
+    })
+    document.addEventListener('keyup', (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.key === 's') allowSave = true;
+    });
+    */
+  })
+  
+  return (
+    <HeaderContainer>
+      <Link to={'/'}>
+        <Logo>
+          <img src={cardPath} />
+          <h1>Mock Cards</h1>
+        </Logo>
+      </Link>
 
-      {
-        saveAction &&
-        <HeaderButton onClick={saveAction} title='save'>
-          <img src={IconSave} alt={'Save Icon'} />
-        </HeaderButton>
-      }
-    </Buttons>
-  </HeaderContainer>
-)
+      <Buttons>
+        {
+          loadAction && 
+          <HeaderButton onClick={loadAction} title='load'>
+            <h4>Load Template</h4>
+            <img src={IconLoad} alt={'Load Icon'} />
+          </HeaderButton>
+        }
+
+        {
+          saveAction &&
+          <HeaderButton onClick={saveAction} title='save'>
+            <h4>Save Template</h4>
+            <img src={IconSave} alt={'Save Icon'} />
+          </HeaderButton>
+        }
+      </Buttons>
+    </HeaderContainer>
+  )
+}
 
 export default Header;

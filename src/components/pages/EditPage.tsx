@@ -39,6 +39,8 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
 
   const saveAction = () => {
     const cardJson = JSON.stringify(cardForm);
+    console.log('Save action triggered with content:')
+    console.log(cardJson);
     localStorage.setItem(cardForm.templateName, cardJson);
     toast('template saved!', {
       position: "top-right",

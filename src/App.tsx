@@ -1,21 +1,14 @@
 import * as React from "react";
-import useForm from "~hooks/UseForm";
-import { 
-  createBrowserRouter, 
-  RouterProvider 
-} from "react-router-dom";
-import { 
-  EditPage, 
-  ErrorPage,
-  HomePage, 
-  LoadPage, 
-} from "~components/pages";
+import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { EditPage, ErrorPage, HomePage, LoadPage } from "~components/pages";
+import { CardForm } from "~types";
+import baseCard from "~CardForms"
 import 'reset.css';
 
 
 export default () => {
-  // State that needs to be hoisted out of page-level components
-  const [form, setForm] = useForm();
+  const [form, setForm] = useState<CardForm>({ ...baseCard});
 
   const router = createBrowserRouter([
     { 
