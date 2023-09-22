@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ControlButton } from '~components/atoms';
 import IconSave from '~assets/icon-save.png';
 import IconLoad from '~assets/icon-folder.png';
-import IconFolderZip from '~assets/icon-folder-zip.png';
+import IconCard from '~assets/icon-card.png';
 
 interface SidebarProps {
+  exportAction: () => void;
   saveAction: () => void;
   loadAction: () => void;
 }
@@ -46,7 +46,26 @@ const SidebarButton = styled.button`
 
 
 
-const Sidebar = ({ saveAction, loadAction }: SidebarProps) => {
+const Sidebar = ({ exportAction, saveAction, loadAction }: SidebarProps) => {
+  /* Currently bugged, fix before release to allow ctl+s saving
+  // let allowSave: boolean = true;
+
+  useEffect(() => {
+    if (saveAction === undefined) return;
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 's' && !e.repeat) {
+        e.preventDefault();
+        if (!allowSave) return;
+        allowSave = false;
+        saveAction();
+      }
+    })
+    document.addEventListener('keyup', (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.key === 's') allowSave = true;
+    });
+  })
+  */
+
   return (
     <SidebarContainer>
       <SidebarButton onClick={loadAction} title='load'>
@@ -59,9 +78,9 @@ const Sidebar = ({ saveAction, loadAction }: SidebarProps) => {
         <h4>save</h4>
       </SidebarButton>
      
-      <SidebarButton onClick={saveAction} title='save'>
-        <img src={IconFolderZip} alt={'Save Icon'} />
-        <h4>export</h4>
+      <SidebarButton onClick={exportAction} title='export'>
+        <img src={IconCard} alt={'Export Icon'} />
+        <h4>sample export</h4>
       </SidebarButton>
     </SidebarContainer>
   )

@@ -12,6 +12,7 @@ import { Canvas, Divider, Header, Sidebar } from '~components/organisms';
 import { Root, Body } from './SharedLayouts';
 import { CardComponent, FormProps } from '~types';
 import { useNavigate } from 'react-router-dom';
+import { drawForExport } from '~components/organisms/canvas/Draw';
 
 interface EditPageProps extends FormProps {};
 
@@ -57,12 +58,35 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
 
   const loadAction = () => navigate('/load');
 
+  const exportAction = () => {
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = cardForm.width;
+    exportCanvas.height = cardForm.height;
+    const ctx = exportCanvas.getContext('2d') as CanvasRenderingContext2D; 
+    ctx.canvas.width = cardForm.width;
+    ctx.canvas.height = cardForm.height; 
+    drawForExport(cardForm, ctx);
+    
+    const dataUrl = exportCanvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = `${cardForm.templateName}.png`;
+    link.href = dataUrl;
+    link.click();
+
+    // cleanup
+    link.remove();
+    exportCanvas.remove();
+  }
+
   return (
     <Root>
-      <Header saveAction={saveAction} loadAction={loadAction} />
+      <Header />
       
       <Body>
-        <Sidebar saveAction={saveAction} loadAction={loadAction} />
+        <Sidebar 
+          saveAction={saveAction}
+          loadAction={loadAction}
+          exportAction={exportAction} />
         <ControlPanel controls={[
           <ControlSetup cardForm={cardForm} setForm={setForm} key='setup-panel'/>,
           <ComponentWrapper key='form-controls'>{...RenderCardComponents(cardForm.components)}</ComponentWrapper>,

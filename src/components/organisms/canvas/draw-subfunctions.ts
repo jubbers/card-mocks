@@ -9,9 +9,17 @@ import {
 
 export const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scaledCardDimensions: Vector2D) => {
   ctx.save();
-  const { clientWidth, clientHeight } = ctx.canvas;
+  const clientWidth = ctx.canvas.clientWidth  || form.width;
+  const clientHeight = ctx.canvas.clientHeight || form.height;
+
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
+
+  console.log('Center:')
+  console.log(center);
+
+  console.log('Card Rect:')
+  console.log(cardRect);
 
   ctx.fillStyle = form.backgroundColor;
   ctx.moveTo(cardRect.left, cardRect.top);
@@ -27,7 +35,9 @@ export const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scal
 }
 
 export const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingContext2D,  scaledCardDimensions: Vector2D, ) => {
-  const { clientWidth, clientHeight } = ctx.canvas;
+  const clientWidth = ctx.canvas.clientWidth  || form.width;
+  const clientHeight = ctx.canvas.clientHeight || form.height;
+  
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
   const scalar: number = scaledCardDimensions.x / form.width;

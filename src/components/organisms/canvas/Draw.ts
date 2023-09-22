@@ -1,8 +1,10 @@
 import { CardForm, Vector2D } from '~types';
 import { DrawBaseCard, DrawTemplatePlaceholders } from './draw-subfunctions';
 
-const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
+export const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   const {clientWidth, clientHeight} = ctx.canvas;
+
+  console.log(`Height: ${clientHeight}\nWidth: ${clientWidth}`)
 
   ctx.fillStyle = '#1E1E1E';
   ctx.fillRect(0, 0, clientWidth, clientHeight);
@@ -29,6 +31,12 @@ const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
 
   DrawBaseCard(form, ctx, scaledCardDimensions);
   DrawTemplatePlaceholders(form, ctx, scaledCardDimensions);
+}
+
+export const drawForExport = (form: CardForm, ctx: CanvasRenderingContext2D) => {
+  const cardSize = { x: form.width, y: form.height };
+  DrawBaseCard(form, ctx, cardSize); 
+  DrawTemplatePlaceholders(form, ctx, cardSize)
 }
 
 export default draw;

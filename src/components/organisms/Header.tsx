@@ -1,15 +1,7 @@
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import cardPath from '~assets/icon-cards.png';
 import { Link } from 'react-router-dom';
-import { ControlButton } from '~components/atoms';
-
-
-interface HeaderProps {
-  saveAction?: () => void;
-  loadAction?: () => void;
-}
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -41,47 +33,7 @@ const Logo = styled.div`
   }
 `
 
-const Buttons = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-`
-
-const HeaderButton = styled(ControlButton)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  gap: 6px;
-  cursor: pointer;  
-
-  img {
-    width: 20px;
-  }
-`;
-
-
-const Header = ({ saveAction, loadAction }: HeaderProps) => {
-  // let allowSave: boolean = true;
-
-  useEffect(() => {
-    /* Currently bugged, fix before release
-    if (saveAction === undefined) return;
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === 's' && !e.repeat) {
-        e.preventDefault();
-        if (!allowSave) return;
-        allowSave = false;
-        saveAction();
-      }
-    })
-    document.addEventListener('keyup', (e: KeyboardEvent) => {
-      if (e.ctrlKey || e.key === 's') allowSave = true;
-    });
-    */
-  })
-  
+const Header = () => {  
   return (
     <HeaderContainer>
       <Link to={'/'}>
@@ -90,12 +42,6 @@ const Header = ({ saveAction, loadAction }: HeaderProps) => {
           <h1>Mock Cards</h1>
         </Logo>
       </Link>
-
-      <Buttons>
-
-
-
-      </Buttons>
     </HeaderContainer>
   )
 }

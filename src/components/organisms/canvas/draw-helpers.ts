@@ -78,7 +78,7 @@ const SetFontOptions = (component: CardComponent, ctx: CanvasRenderingContext2D,
 
   // font size
 
-  ctx.font = `${24 * uniformScalar}px "IBM Plex Mono"`; 
+  ctx.font = `${20 * uniformScalar}px "IBM Plex Mono"`; 
 
   // font color
   ctx.fillStyle = component.textColor;
