@@ -41,17 +41,12 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
 
   const saveAction = () => {
     const cardJson = JSON.stringify(cardForm);
-    console.log('Save action triggered with content:')
-    console.log(cardJson);
     localStorage.setItem(cardForm.templateName, cardJson);
     toast('template saved!', {
       position: "top-right",
       autoClose: 2500,
-      hideProgressBar: false,
       closeOnClick: true,
-      pauseOnHover: true,
       draggable: true,
-      progress: undefined,
       theme: "dark",
     })
   }
@@ -78,6 +73,10 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
     exportCanvas.remove();
   }
 
+  const exportAllAction = () => {
+    setShowDialogue(true);
+  }
+
   return (
     <Root>
       <Header />
@@ -86,7 +85,8 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
         <Sidebar 
           saveAction={saveAction}
           loadAction={loadAction}
-          exportAction={exportAction} />
+          exportSampleAction={exportAction}
+          exportAllAction={exportAllAction} />
         <ControlPanel controls={[
           <ControlSetup cardForm={cardForm} setForm={setForm} key='setup-panel'/>,
           <ComponentWrapper key='form-controls'>{...RenderCardComponents(cardForm.components)}</ComponentWrapper>,
@@ -97,18 +97,6 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       </Body>
 
       <ToastContainer />
-
-      { 
-        showDialogue && 
-        <ControlDialogue 
-          label={''} 
-          inputContent={''} 
-          buttonContent={''} 
-          closeAction={() => {}} 
-          continueAction={() => {}} 
-          updateAction={() => {}} />
-      }
-
     </Root>
   )
 

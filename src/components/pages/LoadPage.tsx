@@ -100,16 +100,14 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
         <Canvas cardForm={cardForm} />
       </Body>
 
-      { 
-        showModal && 
-        <ControlDialogue 
-          label={modalText}
-          inputContent={cardForm.templateName}
-          buttonContent={'continue'}
-          continueAction={dialogueContinue} 
-          closeAction={dialogueClose} 
-          updateAction={dialogueUpdate} /> 
-      }
+      <ControlDialogue 
+        label={modalText}
+        visible={showModal}
+        inputContent={cardForm.templateName}
+        buttonContent={'continue'}
+        continueAction={dialogueContinue} 
+        closeAction={dialogueClose} 
+        updateAction={dialogueUpdate} /> 
     </Root>
   )
 }

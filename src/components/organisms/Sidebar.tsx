@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import IconSave from '~assets/icon-save.png';
 import IconLoad from '~assets/icon-folder.png';
 import IconCard from '~assets/icon-card.png';
+import IconZip  from '~assets/icon-folder-zip.png'
 
 interface SidebarProps {
-  exportAction: () => void;
   saveAction: () => void;
   loadAction: () => void;
+  exportSampleAction: () => void;
+  exportAllAction: () => void;
 }
 
 const SidebarContainer = styled.div`
@@ -23,8 +25,8 @@ const SidebarButton = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 6px 0;
-  gap: 2px;
+  padding: 10px 0;
+  gap: 4px;
 
   color: #FFF;
   background-color: inherit;
@@ -42,11 +44,15 @@ const SidebarButton = styled.button`
   img {
     width: 24px;
   }
+
+  h4 {
+    font-weight: 300;
+  }
 `;
 
 
 
-const Sidebar = ({ exportAction, saveAction, loadAction }: SidebarProps) => {
+const Sidebar = ({ saveAction, loadAction, exportSampleAction, exportAllAction }: SidebarProps) => {
   /* Currently bugged, fix before release to allow ctl+s saving
   // let allowSave: boolean = true;
 
@@ -78,9 +84,14 @@ const Sidebar = ({ exportAction, saveAction, loadAction }: SidebarProps) => {
         <h4>save</h4>
       </SidebarButton>
      
-      <SidebarButton onClick={exportAction} title='export'>
+      <SidebarButton onClick={exportSampleAction} title='export sample'>
         <img src={IconCard} alt={'Export Icon'} />
-        <h4>sample export</h4>
+        <h4>export sample</h4>
+      </SidebarButton>
+
+      <SidebarButton onClick={exportAllAction} title='full export button'>
+        <img src={IconZip} alt={'Export Icon'} />
+        <h4>export all</h4>
       </SidebarButton>
     </SidebarContainer>
   )

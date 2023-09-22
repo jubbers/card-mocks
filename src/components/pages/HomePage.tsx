@@ -51,16 +51,14 @@ const HomePage = ({ cardForm, setForm }: HomePageProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const newTemplateOnClick = () => {
-    console.log('new button click registered');
     setForm({ ...defaultForm, templateName: generate(3).join('-') });
     setShowModal(!showModal);
-    console.log('showModal set to true');
   }
 
   const dialogueClose = () => { 
-    localStorage.clear();
     setShowModal(!showModal);
   };
+
   const dialogueUpdate = (newName: string) => {
     const formCopy = { ...cardForm };
     formCopy.templateName = newName;
@@ -82,17 +80,15 @@ const HomePage = ({ cardForm, setForm }: HomePageProps) => {
         </OptionButton>  
       </CenteredBody>
 
-      { 
-        showModal && 
-        <ControlDialogue 
-          key={'homepage-control-dialogue'}
-          label={'new template name:'}
-          inputContent={cardForm.templateName}
-          buttonContent={'continue'}
-          continueAction={() => navigate('/edit')} 
-          closeAction={dialogueClose} 
-          updateAction={dialogueUpdate} />
-      }
+      <ControlDialogue 
+        visible={showModal}
+        key={'homepage-control-dialogue'}
+        label={'new template name:'}
+        inputContent={cardForm.templateName}
+        buttonContent={'continue'}
+        continueAction={() => navigate('/edit')} 
+        closeAction={dialogueClose} 
+        updateAction={dialogueUpdate} />
     </Root>
   )
 }
