@@ -77,9 +77,8 @@ const SetFontOptions = (component: CardComponent, ctx: CanvasRenderingContext2D,
   }
 
   // font size
-  const font: string[] = ctx.font.split(' ');
-  font.shift();
-  ctx.font = `${24 * uniformScalar}px ` + font.join(' ');
+
+  ctx.font = `${24 * uniformScalar}px "IBM Plex Mono"`; 
 
   // font color
   ctx.fillStyle = component.textColor;
@@ -87,20 +86,25 @@ const SetFontOptions = (component: CardComponent, ctx: CanvasRenderingContext2D,
 
 /** Text writing */
 const SplitTextToWrap = (text: string, paddedCardWidth: number, ctx: CanvasRenderingContext2D): string[]=> {
-  const words = text.split(' ');
-  let currentRow: string[] = [];
-  let completedRows: string[] = []
+  const chunks = text.split('\n');
+  let completedRows: string[] = [];
+ 
+  chunks.forEach(chunk => {
+    let currentRow: string[] = [];
+    const words = chunk.split(' ');
+   
+    words.forEach(word => {
+      currentRow.push(word);
+      if (ctx.measureText(currentRow.join(' ')).width > paddedCardWidth) {
+        currentRow.pop();
+        completedRows.push(currentRow.join(' '));
+        currentRow = [word];
+      }
+    })
 
-  words.forEach(word => {
-    currentRow.push(word);
-    if (ctx.measureText(currentRow.join(' ')).width > paddedCardWidth) {
-      currentRow.pop();
-      completedRows.push(...currentRow.join(' ').split('\n'));
-      currentRow = [word];
-    }
+    completedRows.push(currentRow.join(' '));
   })
 
-  completedRows.push(...currentRow.join(' ').split('\n'))
   return completedRows;
 }
 

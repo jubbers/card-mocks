@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ControlButton, ControlPair, ControlText } from '~components/atoms';
-import ControlRemoveButton from './ControlRemoveButton';
+import { ControlRemoveButton } from '~components/molecules';
 
 interface ControlDialogueProps {
   label: string;

@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import cardPath from '~assets/icon-cards.png';
 import { Link } from 'react-router-dom';
 import { ControlButton } from '~components/atoms';
-import IconSave from '~assets/icon-save.png';
-import IconLoad from '~assets/icon-folder.png';
+
 
 interface HeaderProps {
   saveAction?: () => void;
@@ -23,8 +22,7 @@ const HeaderContainer = styled.header`
 
   height: 7.5vh;
   padding: 4px 64px;
-  border-bottom: 2px solid #3E3E42;
-  background-color: #1E1E1E;
+  background-color: #131012;
   z-index: 99; //100+ reserved for overlays
 `;
 
@@ -65,7 +63,7 @@ const HeaderButton = styled(ControlButton)`
 
 
 const Header = ({ saveAction, loadAction }: HeaderProps) => {
-  let allowSave: boolean = true;
+  // let allowSave: boolean = true;
 
   useEffect(() => {
     /* Currently bugged, fix before release
@@ -94,21 +92,9 @@ const Header = ({ saveAction, loadAction }: HeaderProps) => {
       </Link>
 
       <Buttons>
-        {
-          loadAction && 
-          <HeaderButton onClick={loadAction} title='load'>
-            <h4>Load Template</h4>
-            <img src={IconLoad} alt={'Load Icon'} />
-          </HeaderButton>
-        }
 
-        {
-          saveAction &&
-          <HeaderButton onClick={saveAction} title='save'>
-            <h4>Save Template</h4>
-            <img src={IconSave} alt={'Save Icon'} />
-          </HeaderButton>
-        }
+
+
       </Buttons>
     </HeaderContainer>
   )

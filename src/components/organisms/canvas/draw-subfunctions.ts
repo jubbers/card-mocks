@@ -43,8 +43,20 @@ export const DrawTemplatePlaceholders = (form: CardForm, ctx: CanvasRenderingCon
     const fontMetrics = ctx.measureText('Zoo Wee Mama'); // arbitrary text, may as well giggle
     const lineHeight = fontMetrics.fontBoundingBoxAscent + fontMetrics.fontBoundingBoxDescent
 
-    SplitTextToWrap(content, paddedCardWidth, ctx).forEach((line, i) => {
-      ctx.fillText(line, xPos, yPos + (i * lineHeight))
+    const splitText = SplitTextToWrap(content, paddedCardWidth, ctx)
+    const baselineOffset = (lineHeight) * (splitText.length - 1);
+    splitText.forEach((line, i) => {
+      switch(component.vertical.type) {
+        case 'start':
+          ctx.fillText(line, xPos, yPos + (i * lineHeight));
+          return;
+        case 'center':
+          // TODO: center vertically
+          ctx.fillText(line, xPos, yPos + (i * lineHeight));
+          return;
+        case 'end':
+          ctx.fillText(line, xPos, yPos - baselineOffset +  (i * lineHeight));
+      }
     });
     ctx.restore();
   })

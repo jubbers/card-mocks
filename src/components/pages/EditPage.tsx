@@ -1,14 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
-import draw from '~draw';
 import { 
   ControlAddButton,
   ControlTemplate, 
   ControlSetup,
   ControlPanel,
+  ControlDialogue,
 } from "~components/molecules";
-import { Canvas, Divider, Header } from '~components/organisms';
+import { Canvas, Divider, Header, Sidebar } from '~components/organisms';
 import { Root, Body } from './SharedLayouts';
 import { CardComponent, FormProps } from '~types';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +24,7 @@ const ComponentWrapper = styled.div`
 
 const EditPage = ({cardForm, setForm}: EditPageProps) => {
   const navigate = useNavigate();
+  const [showDialogue, setShowDialogue] = React.useState<boolean>(false);
 
   const RenderCardComponents = (components: CardComponent[]) => {
     return components.map((component, index) => (
@@ -61,6 +62,7 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       <Header saveAction={saveAction} loadAction={loadAction} />
       
       <Body>
+        <Sidebar saveAction={saveAction} loadAction={loadAction} />
         <ControlPanel controls={[
           <ControlSetup cardForm={cardForm} setForm={setForm} key='setup-panel'/>,
           <ComponentWrapper key='form-controls'>{...RenderCardComponents(cardForm.components)}</ComponentWrapper>,
@@ -71,6 +73,18 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       </Body>
 
       <ToastContainer />
+
+      { 
+        showDialogue && 
+        <ControlDialogue 
+          label={''} 
+          inputContent={''} 
+          buttonContent={''} 
+          closeAction={() => {}} 
+          continueAction={() => {}} 
+          updateAction={() => {}} />
+      }
+
     </Root>
   )
 

@@ -86,3 +86,5 @@ Then follow the normal procedure in GitHub Pages and select the `gh-pages` branc
 - Playing Card Icon designed by [Freepik from Flaticon](https://www.freepik.com/). Updated and remixed for logo design.
 
 - Save Diskette Icon designed by [Yogi Aprelliyanto from Flaticon](https://www.flaticon.com/authors/yogi-aprelliyanto)
+
+- Other Icons designed by me (or I forgot who made them and I'm sorry. If it's yours, please shoot me a DM and I'll update the credits here)
