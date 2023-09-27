@@ -1,15 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { ControlButton } from '~components/atoms';
 import { ControlRemoveButton } from '~components/molecules';
 
-interface ControlModalProps {
+export interface ModalProps {
   visible: boolean;
-  children: React.ReactNode;
+  buttonContent: string;
+  continueAction: () => void;
   removeAction: (() => void) | ((e: React.MouseEvent<HTMLButtonElement>) => void);
 }
 
-const BackgroundOpacityLayer = styled.div<{ visible: boolean; }>`
-  display: ${(props) => props.visible ? 'flex' : 'none'};
+const BackgroundOpacityLayer = styled.div<{ $visible: boolean; }>`
+  display: ${(props) => props.$visible ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -21,7 +23,7 @@ const BackgroundOpacityLayer = styled.div<{ visible: boolean; }>`
   z-index: 100;
 `
 
-const ControlModalWrapper = styled.div`
+const ModalWrapper = styled.div`
   opacity: 100%;
   display: flex;
   position: relative;
@@ -37,17 +39,22 @@ const ControlModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  label {
+    margin-right: 10vw;
+  }
 `
 
-const ControlModal = ({ visible, children, removeAction }: ControlModalProps) => {
+const Modal = ({ buttonContent, children, visible, continueAction, removeAction }: React.PropsWithChildren<ModalProps>) => {
   return (
-  <BackgroundOpacityLayer visible={visible}>
-    <ControlModalWrapper>
+  <BackgroundOpacityLayer $visible={visible}>
+    <ModalWrapper>
       <ControlRemoveButton removeAction={removeAction}/>
       { children }
-    </ControlModalWrapper>
+      <ControlButton onClick={continueAction}>{buttonContent}</ControlButton>
+    </ModalWrapper>
   </BackgroundOpacityLayer>
   )
 }
 
-export default ControlModal;
+export default Modal;

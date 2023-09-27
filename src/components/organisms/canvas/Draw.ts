@@ -4,8 +4,6 @@ import { DrawBaseCard, DrawTemplatePlaceholders } from './draw-subfunctions';
 export const draw = (form: CardForm, ctx: CanvasRenderingContext2D) => {
   const {clientWidth, clientHeight} = ctx.canvas;
 
-  console.log(`Height: ${clientHeight}\nWidth: ${clientWidth}`)
-
   ctx.fillStyle = '#1E1E1E';
   ctx.fillRect(0, 0, clientWidth, clientHeight);
 

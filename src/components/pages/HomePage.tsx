@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { generate } from 'random-words';
+import { ControlButton } from '~components/atoms';
+import { DialogueText } from '~components/molecules';
 import { Header } from '~components/organisms';
 import { Root, Body } from '~components/pages';
 import { FormProps } from '~types';
 import defaultForm from '~CardForms';
-import { ControlDialogue } from '~components/molecules';
 import IconCard from '~assets/icon-card.png';
 import IconFolder from '~assets/icon-folder.png';
-import { ControlButton } from '~components/atoms';
 
 interface HomePageProps extends FormProps {};
 
@@ -59,7 +59,7 @@ const HomePage = ({ cardForm, setForm }: HomePageProps) => {
     setShowModal(!showModal);
   };
 
-  const dialogueUpdate = (newName: string) => {
+  const updateInputContent = (newName: string) => {
     const formCopy = { ...cardForm };
     formCopy.templateName = newName;
     setForm(formCopy);
@@ -80,15 +80,15 @@ const HomePage = ({ cardForm, setForm }: HomePageProps) => {
         </OptionButton>  
       </CenteredBody>
 
-      <ControlDialogue 
+      <DialogueText 
         visible={showModal}
         key={'homepage-control-dialogue'}
         label={'new template name:'}
         inputContent={cardForm.templateName}
+        inputUpdate={updateInputContent}
         buttonContent={'continue'}
         continueAction={() => navigate('/edit')} 
-        closeAction={dialogueClose} 
-        updateAction={dialogueUpdate} />
+        removeAction={dialogueClose} />
     </Root>
   )
 }

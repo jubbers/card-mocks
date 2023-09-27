@@ -2,13 +2,12 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Canvas } from '~components/organisms';
-import { ControlDialogue, ControlTemplateLoader } from '~components/molecules';
-import { Divider, Header } from '~components/organisms';
+import { ControlButton } from '~components/atoms'
+import { ControlTemplateLoader, DialogueText } from '~components/molecules';
+import { Divider, Header, Canvas } from '~components/organisms';
 import { Body, Root } from '~components/pages';
 import { CardForm, FormProps } from '~types';
 import { generate } from 'random-words';
-import { ControlButton } from '~components/atoms';
 import defaultForm from '~CardForms';
 
 interface LoadPageProps extends FormProps {};
@@ -72,11 +71,10 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
 
   const dialogueContinue = () => navigate('/edit');
   const dialogueClose = (e: React.MouseEvent<HTMLButtonElement>) => { 
-    localStorage.clear();
     e.stopPropagation();
     setShowModal(false);
   };
-  const dialogueUpdate = (newName: string) => {
+  const dialogueInputUpdate = (newName: string) => {
     const formCopy = { ...cardForm };
     formCopy.templateName = newName;
     setForm(formCopy);
@@ -100,14 +98,14 @@ const LoadPage = ({cardForm, setForm}: LoadPageProps) => {
         <Canvas cardForm={cardForm} />
       </Body>
 
-      <ControlDialogue 
+      <DialogueText 
         label={modalText}
         visible={showModal}
         inputContent={cardForm.templateName}
+        inputUpdate={dialogueInputUpdate} 
         buttonContent={'continue'}
         continueAction={dialogueContinue} 
-        closeAction={dialogueClose} 
-        updateAction={dialogueUpdate} /> 
+        removeAction={dialogueClose} /> 
     </Root>
   )
 }

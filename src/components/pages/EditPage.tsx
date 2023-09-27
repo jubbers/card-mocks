@@ -1,18 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
+import { ControlPanel} from '~components/atoms'
 import { 
   ControlAddButton,
   ControlTemplate, 
   ControlSetup,
-  ControlPanel,
-  ControlDialogue,
+  DialogueUpload,
 } from "~components/molecules";
 import { Canvas, Divider, Header, Sidebar } from '~components/organisms';
 import { Root, Body } from './SharedLayouts';
-import { CardComponent, FormProps } from '~types';
+import { CardComponent, CardForm, FormProps } from '~types';
 import { useNavigate } from 'react-router-dom';
-import { drawForExport } from '~components/organisms/canvas/Draw';
+import { parseArrayFromCsv, generateDownloadLink, blobify } from '~components/export-helpers';
+import * as JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 interface EditPageProps extends FormProps {};
 
@@ -52,29 +54,69 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
   }
 
   const loadAction = () => navigate('/load');
+  const exportSampleAction = () => generateDownloadLink(cardForm).download();
+  const exportAllAction = () => setShowDialogue(true);
+  const closeDialogueAction = () => setShowDialogue(false);
 
-  const exportAction = () => {
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = cardForm.width;
-    exportCanvas.height = cardForm.height;
-    const ctx = exportCanvas.getContext('2d') as CanvasRenderingContext2D; 
-    ctx.canvas.width = cardForm.width;
-    ctx.canvas.height = cardForm.height; 
-    drawForExport(cardForm, ctx);
-    
-    const dataUrl = exportCanvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.download = `${cardForm.templateName}.png`;
-    link.href = dataUrl;
-    link.click();
+  const onFileUpload = async (f: File) => {
+    const fileText = await f.text()
+    const parsedData = parseArrayFromCsv(fileText);
 
-    // cleanup
-    link.remove();
-    exportCanvas.remove();
-  }
+    if (parsedData.length === 0) {
+      console.log(parsedData);
+      throw new Error('Invalid file parse');
+    }
 
-  const exportAllAction = () => {
-    setShowDialogue(true);
+    // validate CSV headers match cardForm component names
+    const csvHeaders: string[] = parsedData[0];
+    const compNames: string[] = cardForm.components.map((comp: CardComponent) => comp.id);
+    const headersMatch = csvHeaders.every((header: string) => compNames.includes(header));
+    if (!headersMatch) throw new Error("CSV headers don't match cardForm component names");
+
+    const orderedComponentIds = cardForm.components.map((component) => component.id);
+    const indicesByPosition = csvHeaders.map((header: string) => orderedComponentIds.indexOf(header));
+
+    // create new cardForm for each row of data
+    const generatedCardForms: CardForm[] = [];
+    for (let i=1; i<parsedData.length; i++) {
+      const cardCopy: CardForm = JSON.parse(JSON.stringify(cardForm)); // deep copy required
+      for (let j=0; j<parsedData[i].length; j++) {
+        cardCopy.components[indicesByPosition[j]].content = parsedData[i][j];
+      }
+      generatedCardForms.push(cardCopy);
+    }
+
+    // Generate the zip file
+    const zip = new JSZip();
+
+    await Promise.all(
+      generatedCardForms.map(async (form: CardForm, index: number) => {
+        const { canvas, cleanup } = generateDownloadLink(form);
+        const blob: Blob = await blobify(canvas);
+        const imgUrl = URL.createObjectURL(blob);
+        zip.file(`${form.templateName}--${index}.png`, blob)
+        cleanup();
+        return Promise.resolve();
+      })
+    )
+
+    console.log('Zip:')
+    console.log(zip);
+
+    // Save the zip file
+    console.log('Zipping...');
+    const content = await zip.generateAsync({ type: "blob" });
+    saveAs(content, `${cardForm.templateName}_all.zip`);
+
+    const parsed = await JSZip.loadAsync(content);
+    console.log('Parsed files:')
+    console.log(parsed.files);
+
+    // zip.generateAsync({ type: "blob" }).then(async (zipBlob: Blob) => {
+      // zipblob not saving information for some reason
+      // saveAs(zipBlob, `${cardForm.templateName}_all.zip`);
+
+
   }
 
   return (
@@ -85,7 +127,7 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
         <Sidebar 
           saveAction={saveAction}
           loadAction={loadAction}
-          exportSampleAction={exportAction}
+          exportSampleAction={exportSampleAction}
           exportAllAction={exportAllAction} />
         <ControlPanel controls={[
           <ControlSetup cardForm={cardForm} setForm={setForm} key='setup-panel'/>,
@@ -96,10 +138,16 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
         <Canvas cardForm={cardForm} />
       </Body>
 
+      <DialogueUpload 
+        label={'upload data file (.csv)'}
+        visible={showDialogue}
+        buttonContent={'continue'}
+        removeAction={closeDialogueAction}  
+        continueAction={() => {}}   
+        onFileUpload={onFileUpload} />
       <ToastContainer />
     </Root>
   )
-
 }
 
 export default EditPage;

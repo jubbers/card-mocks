@@ -6,7 +6,8 @@
         "paths": {
             "~*": [
                 "./*"
-            ]
+            ],
+            "jszip": ["node_modules/jszip/dist/jszip.min.js"],
         },
         "strict": true,
         "target": "ES2020"

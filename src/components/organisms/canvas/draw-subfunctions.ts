@@ -15,12 +15,6 @@ export const DrawBaseCard = (form: CardForm, ctx: CanvasRenderingContext2D, scal
   const center: Vector2D = { x: clientWidth/2, y: clientHeight/2 };
   const cardRect: Rect = CenterAbout(scaledCardDimensions, center);
 
-  console.log('Center:')
-  console.log(center);
-
-  console.log('Card Rect:')
-  console.log(cardRect);
-
   ctx.fillStyle = form.backgroundColor;
   ctx.moveTo(cardRect.left, cardRect.top);
   ctx.roundRect(
