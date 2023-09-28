@@ -28,6 +28,7 @@ const ComponentWrapper = styled.div`
 const EditPage = ({cardForm, setForm}: EditPageProps) => {
   const navigate = useNavigate();
   const [showDialogue, setShowDialogue] = React.useState<boolean>(false);
+  const [parsedData, setParsedData] = React.useState<string[][]>([]);
 
   const RenderCardComponents = (components: CardComponent[]) => {
     return components.map((component, index) => (
@@ -58,25 +59,44 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
   const exportAllAction = () => setShowDialogue(true);
   const closeDialogueAction = () => setShowDialogue(false);
 
-  const onFileUpload = async (f: File) => {
-    const fileText = await f.text()
-    const parsedData = parseArrayFromCsv(fileText);
+  const onFileUpload = async (f: File): Promise<boolean> => {
+    const fileText: string = await f.text()
+    const parsedData: string[][] = parseArrayFromCsv(fileText);
 
     if (parsedData.length === 0) {
       console.log(parsedData);
-      throw new Error('Invalid file parse');
-    }
+      toast('File is empty!', {
+        position: "top-right",
+        autoClose: 2500,
+        closeOnClick: true,
+        draggable: true,
+        theme: "dark",
+      })
+      return false;
+    } 
 
     // validate CSV headers match cardForm component names
-    const csvHeaders: string[] = parsedData[0];
     const compNames: string[] = cardForm.components.map((comp: CardComponent) => comp.id);
-    const headersMatch = csvHeaders.every((header: string) => compNames.includes(header));
-    if (!headersMatch) throw new Error("CSV headers don't match cardForm component names");
+    const headersMatch = parsedData[0].every((header: string) => compNames.includes(header));
+    if (!headersMatch) {
+      toast("CSV headers don't match template component names", {
+        position: "top-right",
+        autoClose: 2500,
+        closeOnClick: true,
+        draggable: true,
+        theme: "dark",
+      })
+      return false;
+    }
 
-    const orderedComponentIds = cardForm.components.map((component) => component.id);
-    const indicesByPosition = csvHeaders.map((header: string) => orderedComponentIds.indexOf(header));
+    setParsedData(parsedData);
+    return true;
+  }
 
+  const onExportContinue = async () => {
     // create new cardForm for each row of data
+    const orderedComponentIds = cardForm.components.map((component) => component.id);
+    const indicesByPosition = parsedData[0].map((header: string) => orderedComponentIds.indexOf(header));
     const generatedCardForms: CardForm[] = [];
     for (let i=1; i<parsedData.length; i++) {
       const cardCopy: CardForm = JSON.parse(JSON.stringify(cardForm)); // deep copy required
@@ -86,9 +106,8 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       generatedCardForms.push(cardCopy);
     }
 
-    // Generate the zip file
+    // add generated files to zip
     const zip = new JSZip();
-
     await Promise.all(
       generatedCardForms.map(async (form: CardForm, index: number) => {
         const { canvas, cleanup } = generateDownloadLink(form);
@@ -100,23 +119,17 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       })
     )
 
-    console.log('Zip:')
-    console.log(zip);
-
-    // Save the zip file
-    console.log('Zipping...');
+    // save the zip file and close the modal
     const content = await zip.generateAsync({ type: "blob" });
     saveAs(content, `${cardForm.templateName}_all.zip`);
-
-    const parsed = await JSZip.loadAsync(content);
-    console.log('Parsed files:')
-    console.log(parsed.files);
-
-    // zip.generateAsync({ type: "blob" }).then(async (zipBlob: Blob) => {
-      // zipblob not saving information for some reason
-      // saveAs(zipBlob, `${cardForm.templateName}_all.zip`);
-
-
+    setShowDialogue(false);
+    toast('template saved!', {
+      position: "top-right",
+      autoClose: 2500,
+      closeOnClick: true,
+      draggable: true,
+      theme: "dark",
+    })
   }
 
   return (
@@ -141,9 +154,9 @@ const EditPage = ({cardForm, setForm}: EditPageProps) => {
       <DialogueUpload 
         label={'upload data file (.csv)'}
         visible={showDialogue}
-        buttonContent={'continue'}
+        buttonContent={'export cards'}
         removeAction={closeDialogueAction}  
-        continueAction={() => {}}   
+        continueAction={onExportContinue}   
         onFileUpload={onFileUpload} />
       <ToastContainer />
     </Root>

@@ -66,7 +66,7 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         id={`component_${index}_id`}
         label='id'
         placeholder='column name on your excel doc'
-        update={updateId} />
+        updateContent={updateId} />
 
       <ControlText 
         content={component.content}
@@ -74,7 +74,7 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
         label='placeholder content'
         placeholder='your placeholder info goes here'
         textArea={true}
-        update={updateContent} />
+        updateContent={updateContent} />
 
       <SideBySideAlignment>
         <ControlAlignment 
@@ -82,13 +82,13 @@ const ComponentControl = ({cardForm, setForm, index, component, removable: remov
           id={`component_${index}_horizontal-alignment`}
           isHorizontal={true}
           label={'horizontal alignment'}
-          update={updateHorizontalAlignment} />
+          updateAlignment={updateHorizontalAlignment} />
         <ControlAlignment 
           component={cardForm.components[index]}
           id={`component_${index}_vertical-alignment`}
           isHorizontal={false}
           label={'vertical alignment'}
-          update={updateVerticalAlignment} />
+          updateAlignment={updateVerticalAlignment} />
       </SideBySideAlignment>
 
 

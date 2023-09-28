@@ -13,10 +13,10 @@ interface ControlTextProps {
   placeholder?: string;
   textArea?: boolean;
   autoFocus?: boolean;
-  update: (content: string) => void;
+  updateContent: (content: string) => void;
 }
 
-const ControlText = ({ autoFocus, content, disabled, id, label, placeholder, textArea, update}: ControlTextProps) => {
+const ControlText = ({ autoFocus, content, disabled, id, label, placeholder, textArea, updateContent: update}: ControlTextProps) => {
   const invalidInputRegex = /[^a-zA-Z0-9_\- .()#,&]/g;
   const invalidTextAreaRegex = /\p{L}/g;
 

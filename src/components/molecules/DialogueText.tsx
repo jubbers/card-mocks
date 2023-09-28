@@ -22,7 +22,7 @@ const DialogueText = ({ buttonContent, inputContent, label, visible, removeActio
           autoFocus={true}
           id={'control-dialogue-box'}
           content={inputContent}  
-          update={inputUpdate} />
+          updateContent={inputUpdate} />
       </ControlPair>
     </Modal>
   )

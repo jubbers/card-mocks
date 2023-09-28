@@ -8,7 +8,7 @@ export interface ControlAlignmentProps {
   label: string;
   component: CardComponent;
   isHorizontal: boolean;
-  update: (alignment: Alignment) => void;
+  updateAlignment: (alignment: Alignment) => void;
 }
 
 const ControlAlignmentContainer = styled.div`
@@ -45,7 +45,7 @@ const CenteredNumbers = styled(ControlNumber)`
 `
 
 
-const ControlAlignment = ({ id, isHorizontal, label, component, update }: ControlAlignmentProps) => {
+const ControlAlignment = ({ id, isHorizontal, label, component, updateAlignment }: ControlAlignmentProps) => {
   const options = isHorizontal 
     ? ['% on left', 'center', '% on right']
     : ['% on top', 'center', '% on bottom'];
@@ -78,7 +78,7 @@ const ControlAlignment = ({ id, isHorizontal, label, component, update }: Contro
     // actually update
     const alignmentCopy: Alignment = isHorizontal ? component.horizontal : component.vertical;
     alignmentCopy.type = typeChecked;
-    update(alignmentCopy);
+    updateAlignment(alignmentCopy);
   }
 
   const updateAlignmentPercentage = (newPercentage: number) => {
@@ -93,7 +93,7 @@ const ControlAlignment = ({ id, isHorizontal, label, component, update }: Contro
       return;
     }
     alignmentCopy.percentage = newPercentage as IntPercent || 0;
-    update(alignmentCopy);
+    updateAlignment(alignmentCopy);
   }
 
 
@@ -105,13 +105,13 @@ const ControlAlignment = ({ id, isHorizontal, label, component, update }: Contro
           id={`component_${id}_alignment-text`} 
           value={componentValue || 0}
           disabled={isValueDisabled()}
-          update={updateAlignmentPercentage} />
+          updateValue={updateAlignmentPercentage} />
         <ControlSelect
           id={`component_${id}_alignment-select`} 
           defaultIndex={defaultSelectIndex} 
           items={options} 
           values={['start', 'center', 'end']}
-          update={updateAlignmentType} />
+          updateValue={updateAlignmentType} />
       </InternalAlignmentControlsContainer>
 
     </ControlAlignmentContainer>

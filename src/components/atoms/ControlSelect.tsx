@@ -7,7 +7,7 @@ interface ControlSelectProps {
   defaultIndex: number;
   items: string[];
   values?: string[];
-  update: (value: string) => void;
+  updateValue: (value: string) => void;
 }
 
 const ControlSelectWrapper = styled.div`
@@ -30,9 +30,9 @@ const ControlSelectWrapper = styled.div`
   }
 `
 
-const ControlSelect = ({ id, label, defaultIndex, items, values, update }: ControlSelectProps) => {
+const ControlSelect = ({ id, label, defaultIndex, items, values, updateValue }: ControlSelectProps) => {
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    update(e.target.value)
+    updateValue(e.target.value)
   }
 
   const determineOptionValue = (index: number): string => {

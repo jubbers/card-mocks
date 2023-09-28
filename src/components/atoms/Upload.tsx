@@ -6,7 +6,7 @@ import { ControlRemoveButton } from '~components/molecules';
 
 interface UploadProps {
   id: string;
-  onFileUpload: (f: File) => void;
+  onFileUpload: (f: File) => Promise<boolean>;
 }
 
 const HiddenInput = styled.input`
@@ -50,14 +50,20 @@ const Upload = ({ id, onFileUpload }: UploadProps) => {
     }
   }
 
-  const handleDrop = (e: DragEvent) => {
+  const handleDrop = async (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setDrag(false);
 
     // Bail out if files invalid;
     if (!e.dataTransfer || !e.dataTransfer!.files || !e.dataTransfer!.files[0]) return;
-    onFileUpload(e.dataTransfer!.files[0]);
+
+    console.log('onFileUpload called...');
+    const valid = await onFileUpload(e.dataTransfer!.files[0]);
+    console.log(`File upload ${ valid ? 'is' : 'aint' } valid`);
+    if (valid) {
+      setFileName(e.dataTransfer!.files[0].name);
+    }
   };
 
   const handleTextClick = (e: React.MouseEvent) => {
@@ -72,27 +78,27 @@ const Upload = ({ id, onFileUpload }: UploadProps) => {
   }
 
   return (
-    <UploadZone 
-      $borderColor={getBorderColor()} 
-      id={id}
-      onDragEnter={handleDrag}
-      onDragOver={handleDrag}
-      onDragLeave={handleDrag}
-      onDrop={handleDrop}>
+    <>
+      <UploadZone 
+        $borderColor={getBorderColor()} 
+        id={id}
+        onDragEnter={handleDrag}
+        onDragOver={handleDrag}
+        onDragLeave={handleDrag}
+        onDrop={handleDrop}>
 
-      {
-        fileName 
-          ? <p>{fileName}</p>
-          : <p>Drag and drop <br/>or <a onClick={handleTextClick}>click to upload</a></p>
-      }
+        <p>Drag and drop <br/>or <a onClick={handleTextClick}>click to upload</a></p>
+        <HiddenInput 
+          type={'file'} 
+          multiple={false} 
+          ref={input} 
+          accept={'.csv'}
+          onChange={handleInputChange}/>
+
+      </UploadZone>
+      { fileName && <p>File: {fileName}</p>}
       
-      <HiddenInput 
-        type={'file'} 
-        multiple={false} 
-        ref={input} 
-        accept={'.csv'}
-        onChange={handleInputChange}/>
-    </UploadZone>
+    </>
   )
 }
 

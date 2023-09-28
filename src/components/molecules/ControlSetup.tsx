@@ -27,26 +27,26 @@ const Setup = ({cardForm, setForm}: SetupProps) => {
         label='template name'
         placeholder='fishing game v6.2'
         content={cardForm.templateName}
-        update={updateTemplateName} />
+        updateContent={updateTemplateName} />
 
       <SideBySideNumbers>
         <ControlNumber 
           id={'height'}
           label={'height (px)'}
           value={cardForm.height} 
-          update={updateHeight} />
+          updateValue={updateHeight} />
         <ControlNumber 
           id={'width'}
           label={'width (px)'}
           value={cardForm.width} 
-          update={updateWidth} />
+          updateValue={updateWidth} />
       </SideBySideNumbers>
 
       <ControlNumber 
         id={'padding'}
         label={'padding (px)'}
         value={cardForm.padding}
-        update={updatePadding} />
+        updateValue={updatePadding} />
 
       <ControlColor 
         id='bgColor'

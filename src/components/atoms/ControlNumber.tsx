@@ -7,7 +7,7 @@ export interface ControlNumberProps {
   disabled?: boolean;
   id: string;
   label?: string;
-  update: (value: number) => void;
+  updateValue: (value: number) => void;
   value: number;
 }
 
@@ -16,16 +16,16 @@ const NumberInput = styled(ControlInput)`
   appearance: textfield;
 `
 
-const ControlNumber = ({ disabled, id, label, update, value}: ControlNumberProps) => {
+const ControlNumber = ({ disabled, id, label, updateValue, value}: ControlNumberProps) => {
   const uniqueId = `${id}_${uuidv4()}`;
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === '') {
-      update(0);
+      updateValue(0);
       return;
     }
     const newValue: number = parseInt(e.currentTarget.value || '0', 10);
-    if (!!newValue) update(newValue);
+    if (!!newValue) updateValue(newValue);
   
   }
 

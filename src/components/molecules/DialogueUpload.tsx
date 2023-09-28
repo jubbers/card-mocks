@@ -6,7 +6,7 @@ import { parseArrayFromCsv } from '~components/export-helpers';
 
 interface DialogueUploadProps extends ModalProps {
   label: string;
-  onFileUpload: (f: File) => void;
+  onFileUpload: (f: File) => Promise<boolean>;
 }
 
 const DialogueUpload = ({label, buttonContent, visible, continueAction, removeAction, onFileUpload}: DialogueUploadProps) => {
