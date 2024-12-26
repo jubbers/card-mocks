@@ -11,7 +11,7 @@
     "typewatch": "tsc --noEmit --watch",
     "lint": "eslint . --ext .ts,.tsx"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "buffer": "^6.0.3",
     "csv-parse": "^5.5.0",
