@@ -20,7 +20,7 @@ const ErrorPage = () => {
       <CenteredBody>
         <h1>Uh oh, you're not <br/>supposed to be here.</h1>
         <p>If you think this is a mistake, submit an <br/>
-        <em><a href='https://github.com/saint-justin/card-mocks/issues'>[issue on GitHub]</a></em> and I'll take a look.</p>
+        <em><a href='https://github.com/jubbers/card-mocks/issues'>[issue on GitHub]</a></em> and I'll take a look.</p>
         <h3><em><Link to='/'>[return to the home page]</Link></em></h3>
       </CenteredBody>
     </Root>
